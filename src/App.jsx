@@ -1,7 +1,9 @@
+import Navbar from "./components/Navbar";
+
 const App = () => {
 	return (
 		<>
-			Navbar
+			<Navbar />
 			<main className='relative'>
 				<section className='padding bg-black text-white'>Hero Section</section>
 				<section className='padding bg-gray-500'>Popular Products</section>
