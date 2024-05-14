@@ -1,3 +1,11 @@
+import {
+	discordBlack,
+	facebook,
+	instagram,
+	telegram,
+	twitter,
+} from "../assests";
+
 const navigation = [
 	{
 		id: "0",
@@ -37,31 +45,31 @@ const socials = [
 	{
 		id: "0",
 		title: "Discord",
-		iconUrl: "",
+		iconUrl: discordBlack,
 		url: "#",
 	},
 	{
 		id: "1",
 		title: "Twitter",
-		iconUrl: "",
+		iconUrl: twitter,
 		url: "#",
 	},
 	{
 		id: "2",
 		title: "Instagram",
-		iconUrl: "",
+		iconUrl: instagram,
 		url: "#",
 	},
 	{
 		id: "3",
 		title: "Telegram",
-		iconUrl: "",
+		iconUrl: telegram,
 		url: "#",
 	},
 	{
 		id: "4",
 		title: "Facebook",
-		iconUrl: "",
+		iconUrl: facebook,
 		url: "#",
 	},
 ];

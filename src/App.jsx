@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
 				<section id='roadmap' className='padding bg-black text-white'>
 					footer
 				</section>
+				<Footer />
 			</main>
 		</>
 	);
