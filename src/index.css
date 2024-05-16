@@ -14,8 +14,20 @@
 }
 
 @layer components {
+	.h1 {
+		@apply text-[2.5rem] font-semibold leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem];
+	}
+
+	.body {
+		@apply text-[0.875rem] leading-[1.5rem] md:text-[1rem] md:leading-[1.75rem] lg:text-[1.25rem] lg:leading-8;
+	}
+
 	.button {
 		@apply rounded-md font-sourceCodePro text-[1rem] font-bold uppercase tracking-wider;
+	}
+
+	.tagline {
+		@apply font-spaceGrotesk text-sm font-light uppercase tracking-[0.15em];
 	}
 }
 

@@ -1,14 +1,13 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Hero from "./sections/Hero";
 
 const App = () => {
 	return (
 		<>
 			<Navbar />
-			<main className='relative'>
-				<section id='signup' className='padding bg-black text-white'>
-					Hero Section
-				</section>
+			<main className=''>
+				<Hero />
 				<section id='features' className='padding bg-gray-500'>
 					Popular Products
 				</section>
