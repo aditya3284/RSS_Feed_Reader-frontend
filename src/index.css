@@ -13,6 +13,12 @@
 	scroll-behavior: smooth;
 }
 
+@layer components {
+	.button {
+		@apply rounded-md font-sourceCodePro text-[1rem] font-bold uppercase tracking-wider;
+	}
+}
+
 @layer utilities {
 	.padding {
 		@apply px-8 py-12 sm:px-16 sm:py-24;
