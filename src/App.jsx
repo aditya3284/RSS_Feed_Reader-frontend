@@ -1,6 +1,6 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
+import Hero from "./components/sections/Hero";
 
 const App = () => {
 	return (

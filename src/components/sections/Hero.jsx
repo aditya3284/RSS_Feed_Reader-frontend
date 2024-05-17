@@ -1,6 +1,6 @@
-import MaxWidthContainer from "../components/MaxWidthContainer";
-import Button from "../components/ui/Button";
-import { socials } from "../constants";
+import MaxWidthContainer from "../MaxWidthContainer";
+import Button from "../ui/Button";
+import { socials } from "../../constants";
 
 const Hero = () => {
 	return (
