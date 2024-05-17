@@ -6,11 +6,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	scroll-behavior: smooth;
+@layer base {
+	* {
+		@apply m-0 box-border scroll-smooth p-0;
+	}
+
+	body {
+		@apply bg-s-8;
+	}
 }
 
 @layer components {
@@ -28,6 +31,30 @@
 
 	.tagline {
 		@apply font-spaceGrotesk text-sm font-light uppercase tracking-[0.15em];
+	}
+
+	.card {
+		@apply rounded-xl border border-s-8 bg-s-7 text-[#09090b] shadow;
+	}
+
+	.card-header {
+		@apply flex flex-col space-y-1.5 p-6;
+	}
+
+	.card-title {
+		@apply font-semibold leading-none tracking-tight;
+	}
+
+	.card-description {
+		@apply text-sm text-[#71717a];
+	}
+
+	.card-content {
+		@apply p-6 pt-0;
+	}
+
+	.card-footer {
+		@apply flex items-center p-6 pt-0;
 	}
 }
 
