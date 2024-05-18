@@ -1,5 +1,6 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Features from "./components/sections/Features";
 import Hero from "./components/sections/Hero";
 
 const App = () => {
@@ -8,9 +9,7 @@ const App = () => {
 			<Navbar />
 			<main className=''>
 				<Hero />
-				<section id='features' className='padding bg-gray-500'>
-					Popular Products
-				</section>
+				<Features />
 				<section id='services' className='padding bg-blue-300'>
 					Services
 				</section>
