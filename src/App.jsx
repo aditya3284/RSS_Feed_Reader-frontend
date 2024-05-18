@@ -2,6 +2,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Features from "./components/sections/Features";
 import Hero from "./components/sections/Hero";
+import Integrations from "./components/sections/Integrations";
 
 const App = () => {
 	return (
@@ -10,9 +11,7 @@ const App = () => {
 			<main className=''>
 				<Hero />
 				<Features />
-				<section id='services' className='padding bg-blue-300'>
-					Services
-				</section>
+				<Integrations />
 				<section id='pricing' className='padding bg-p-6'>
 					Special Offer
 				</section>
