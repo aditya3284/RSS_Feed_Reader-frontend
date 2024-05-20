@@ -18,7 +18,7 @@ const Integrations = () => {
 						<Heading
 							title={thirdPartyIntegrations.title}
 							body={thirdPartyIntegrations.descriptionText}
-							className='text-pretty font-sora pr-20'
+							className='text-pretty pr-20 font-sora'
 						/>
 						<ul className='-mt-10 list-disc font-sora text-s-4 md:ml-12 lg:-mt-16 lg:ml-0 lg:px-4'>
 							{thirdPartyIntegrations.content.map((item) => (
@@ -30,10 +30,10 @@ const Integrations = () => {
 						{thirdPartyIntegrations.applications.map((item) => (
 							<Card
 								key={item.id}
-								className='relative mx-auto flex w-4/5 items-center justify-between text-s-1 lg:mx-20 lg:min-w-80 even:lg:-translate-x-28'
+								className='relative mx-auto flex w-4/5 items-center justify-between bg-s-2 text-s-8 lg:mx-20 lg:min-w-80 even:lg:-translate-x-28 dark:bg-s-7 dark:text-s-1'
 							>
 								<CardHeader className='pl-5 pr-0 sm:pl-6 lg:p-6'>
-									<CardTitle className='pl-2 text-[16px]  font-semibold'>
+									<CardTitle className='h3 pl-2 text-[16px] font-semibold '>
 										{item.title}
 									</CardTitle>
 									<CardDescription className='absolute -left-5 -top-5 w-fit rounded-xl bg-p-1 px-1.5 py-0.5 text-s-6 before:font-bold before:text-s-5 before:content-["\26AC"] md:-right-5 lg:static'>
@@ -47,6 +47,7 @@ const Integrations = () => {
 										height={item.height}
 										alt={item.title + "logo"}
 										className=''
+										loading='lazy'
 									/>
 								</CardContent>
 							</Card>
