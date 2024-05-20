@@ -8,20 +8,23 @@ const Features = () => {
 		<section aria-label='Features' className='my-10'>
 			<MaxWidthContainer>
 				<Heading
-					className='mt-5 md:max-w-md lg:max-w-2xl'
+					className='mt-5 text-center md:max-w-md lg:max-w-2xl'
 					title='Live Smarter. Not Harder with feedReader'
 				/>
 				<div className='flex flex-wrap justify-center gap-10 '>
 					{features.map((item) => (
-						<Card key={item.id} className='md:max-w-[21.5rem]'>
-							<CardHeader className='font-sora text-2xl font-normal text-s-1'>
+						<Card
+							key={item.id}
+							className='bg-s-2 md:max-w-[21.5rem] dark:bg-s-7'
+						>
+							<CardHeader className='font-sora text-2xl font-normal'>
 								{item.title}
 							</CardHeader>
-							<CardDescription className='p-6 pt-0 font-sora font-light text-s-3'>
+							<CardDescription className='p-6 pt-0 font-sora font-light'>
 								{item.text}
 							</CardDescription>
-							<CardFooter className='flex justify-between font-sourceCodePro text-sm font-semibold uppercase text-s-1'>
-								<img src={item.iconUrl} alt='' />
+							<CardFooter className='flex justify-between font-sourceCodePro text-sm font-semibold uppercase'>
+								<img src={item.iconUrl} alt='' loading='lazy' />
 								<p>Explore More &gt;</p>
 							</CardFooter>
 						</Card>
