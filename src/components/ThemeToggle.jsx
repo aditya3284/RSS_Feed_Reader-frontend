@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { MoonSVG, SunSVG } from "../assests";
 
 function update() {
 	if (
@@ -57,3 +59,35 @@ function useTheme() {
 
 	return { setting, setSetting };
 }
+
+const ThemeToggle = ({ classes, showText = true }) => {
+	const { setting, setSetting } = useTheme();
+	return (
+		<button
+			onClick={() => {
+				document.getElementById("theme-toggle-img").getAttribute("src") ===
+				MoonSVG
+					? setSetting("light")
+					: setSetting("dark");
+			}}
+			className={`${showText ? "flex gap-5" : ""} ${classes || ""}`}
+		>
+			<img
+				id='theme-toggle-img'
+				src={setting === "light" ? SunSVG : MoonSVG}
+				width={24}
+				height={24}
+				className='inline'
+				loading='lazy'
+			/>
+			{showText && <p className='font-bold'>Theme</p>}
+		</button>
+	);
+};
+
+ThemeToggle.propTypes = {
+	showText: PropTypes.bool,
+	classes: PropTypes.string,
+};
+
+export default ThemeToggle;
