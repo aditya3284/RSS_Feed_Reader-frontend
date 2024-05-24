@@ -9,8 +9,14 @@ function update() {
 			window.matchMedia("(prefers-colors-scheme: dark)").matches)
 	) {
 		document.documentElement.classList.add("dark");
+		document
+			.querySelector('[name="theme-color"]')
+			.setAttribute("content", "#ffffff");
 	} else {
 		document.documentElement.classList.remove("dark");
+		document
+			.querySelector('[name="theme-color"]')
+			.setAttribute("content", "#000000");
 	}
 }
 
