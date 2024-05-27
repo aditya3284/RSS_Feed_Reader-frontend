@@ -1,17 +1,29 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Button = ({ children, href, onClickFn, className }) => {
-	const classes = `button hover:text-p-1 bg-s-1 inline-grid place-items-center py-2.5 px-3 transition-colors ${className || ""}`;
+const Button = ({
+	children,
+	disabled,
+	href,
+	onClickFn,
+	className,
+	...props
+}) => {
+	const classes = `button transition-all ${className || ""}`;
 
 	const renderButton = () => (
-		<button className={classes} onClick={onClickFn}>
-			<span>{children}</span>
+		<button
+			disabled={disabled}
+			className={classes}
+			onClick={onClickFn}
+			{...props}
+		>
+			{children}
 		</button>
 	);
 
 	const renderLink = () => (
-		<Link to={href} className={classes}>
+		<Link to={href} className={classes} {...props}>
 			<span>{children}</span>
 		</Link>
 	);
@@ -21,6 +33,7 @@ const Button = ({ children, href, onClickFn, className }) => {
 
 Button.propTypes = {
 	children: PropTypes.node,
+	disabled: PropTypes.bool,
 	href: PropTypes.string,
 	onClickFn: PropTypes.func,
 	className: PropTypes.string,
