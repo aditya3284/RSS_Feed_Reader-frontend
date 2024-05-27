@@ -74,4 +74,7 @@
 	.padding {
 		@apply px-8 py-12 sm:px-16 sm:py-24;
 	}
+	.padding-hr {
+		@apply px-6 py-6 sm:px-28 sm:py-12;
+	}
 }
