@@ -4,3 +4,4 @@ export { default as Integrations } from "./Integrations";
 export { default as NotFound404 } from "./NotFound404";
 export { default as Pricing } from "./Pricing";
 export { default as Roadmap } from "./Roadmap";
+export { default as SignUp } from "./SignUp";

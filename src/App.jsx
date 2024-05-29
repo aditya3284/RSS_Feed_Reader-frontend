@@ -6,6 +6,7 @@ import {
 	NotFound404,
 	Pricing,
 	Roadmap,
+	SignUp,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <Home />,
 		errorElement: <NotFound404 />,
+	},
+	{
+		path: "/signup",
+		element: <SignUp />,
 	},
 	{
 		path: "/integrations",
