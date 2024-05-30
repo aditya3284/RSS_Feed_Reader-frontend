@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "../components/ui/Button";
 import useLogIn from "../hooks/useLogIn";
+import useUserContext from "../hooks/useUserContext";
 
 const LogInForm = () => {
 	const userEmail = useRef(null);
@@ -95,7 +96,17 @@ const LogInForm = () => {
 };
 
 const LogIn = () => {
-	return <LogInForm />;
+	const { authed } = useUserContext();
+
+	return authed ? (
+		<Navigate to={"/blog"} />
+	) : (
+		<>
+			<main>
+				<LogInForm />
+			</main>
+		</>
+	);
 };
 
 export default LogIn;
