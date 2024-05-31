@@ -4,43 +4,46 @@ import {
 	benefit_Icon3,
 	benefit_Icon4,
 	discordBlack,
+	discordColor,
 	facebook,
 	instagram,
+	notionColor,
 	telegram,
 	twitter,
+	youtubeColor,
 } from "../assests";
 
 const navigation = [
 	{
 		id: "0",
-		title: "Features",
-		url: "#features",
+		title: "Dashboard",
+		url: "/dashboard/home",
 	},
 	{
 		id: "1",
 		title: "Pricing",
-		url: "#pricing",
+		url: "/pricing",
 	},
 	{
 		id: "2",
-		title: "How to use",
-		url: "#how-to-use",
+		title: "Blog",
+		url: "/blog",
 	},
 	{
 		id: "3",
 		title: "Roadmap",
-		url: "#roadmap",
+		url: "/roadmap",
 	},
 	{
 		id: "4",
 		title: "New account",
-		url: "#signup",
+		url: "/signup",
 		onlyMobile: true,
 	},
 	{
 		id: "5",
-		title: "Sign in",
-		url: "#login",
+		title: "Log in",
+		url: "/login",
 		onlyMobile: true,
 	},
 ];
@@ -77,6 +80,53 @@ const socials = [
 		url: "#",
 	},
 ];
+
+const thirdPartyIntegrations = {
+	title: "FeedReader with seamless integrations",
+	descriptionText:
+		"With easy integration and top-notch quality, perfect solution for individuals looking to work smarter.",
+	content: [
+		{
+			id: "0",
+			title: "Seamless Integration",
+			text: "With smart automation and top-notch security, it's the perfect solution for teams looking to work smarter.",
+		},
+		{
+			id: "1",
+			title: "Smart Automation",
+		},
+		{
+			id: "2",
+			title: "Top-notch Quality",
+		},
+	],
+	applications: [
+		{
+			id: 0,
+			title: "Notion",
+			icon: notionColor,
+			availabilityStatus: "Coming Soon",
+			width: 40,
+			height: 36,
+		},
+		{
+			id: 1,
+			title: "Discord",
+			icon: discordColor,
+			availabilityStatus: "Coming Soon",
+			width: 40,
+			height: 48,
+		},
+		{
+			id: 2,
+			title: "YouTube",
+			icon: youtubeColor,
+			availabilityStatus: "Coming Soon",
+			width: 45,
+			height: 35,
+		},
+	],
+};
 
 const features = [
 	{
@@ -123,4 +173,4 @@ const features = [
 	},
 ];
 
-export { features, navigation, socials };
+export { features, navigation, socials, thirdPartyIntegrations };
