@@ -3,6 +3,7 @@ import {
 	Blog,
 	Home,
 	Integrations,
+	LogIn,
 	NotFound404,
 	Pricing,
 	Roadmap,
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <Home />,
 		errorElement: <NotFound404 />,
+	},
+	{
+		path: "/login",
+		element: <LogIn />,
 	},
 	{
 		path: "/signup",
