@@ -1,4 +1,9 @@
 import {
+	Clock,
+	FilledHeart,
+	History,
+	Home,
+	Library,
 	benefit_Icon1,
 	benefit_Icon2,
 	benefit_Icon3,
@@ -173,4 +178,57 @@ const features = [
 	},
 ];
 
-export { features, navigation, socials, thirdPartyIntegrations };
+const sideNavItems = [
+	{
+		id: "home",
+		icon: Home,
+		size: {
+			width: 25,
+			height: 25,
+		},
+		label: "Home",
+		link: "/dashboard/home",
+	},
+	{
+		id: "history",
+		icon: History,
+		size: {
+			width: 25,
+			height: 25,
+		},
+		label: "History",
+		link: "/dashboard/history",
+	},
+	{
+		id: "recent",
+		icon: Clock,
+		size: {
+			width: 25,
+			height: 25,
+		},
+		label: "Recent",
+		link: "/dashboard/recent",
+	},
+	{
+		id: "liked",
+		icon: FilledHeart,
+		size: {
+			width: 25,
+			height: 25,
+		},
+		label: "Liked",
+		link: "/dashboard/liked",
+	},
+	{
+		id: "library",
+		icon: Library,
+		size: {
+			width: 25,
+			height: 25,
+		},
+		label: "Library",
+		link: "/dashboard/library",
+	},
+];
+
+export { features, navigation, sideNavItems, socials, thirdPartyIntegrations };
