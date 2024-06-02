@@ -68,6 +68,10 @@
 	.card-footer {
 		@apply flex items-center p-6 pt-0 text-s-7 dark:text-s-1;
 	}
+
+	.modal {
+		@apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  rounded-xl backdrop:bg-s-4/85 dark:bg-slate-800 dark:text-s-2 dark:backdrop:bg-s-7/85;
+	}
 }
 
 @layer utilities {
