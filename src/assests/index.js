@@ -20,5 +20,11 @@ export { default as youtubeColor } from "./thirdPartyIntegrations/youtube.png";
 export { default as MoonSVG } from "./theme/Moon.svg";
 export { default as SunSVG } from "./theme/Sun.svg";
 //sidebar-icons-svg
+export { default as Archive } from "./icons/Archive.svg";
+export { default as Clock } from "./icons/Clock.svg";
+export { default as FilledHeart } from "./icons/FilledHeart.svg";
+export { default as History } from "./icons/History.svg";
+export { default as Home } from "./icons/Home.svg";
+export { default as Library } from "./icons/Library.svg";
 export { default as Plus } from "./icons/Plus.svg";
 
