@@ -231,4 +231,17 @@ const sideNavItems = [
 	},
 ];
 
-export { features, navigation, sideNavItems, socials, thirdPartyIntegrations };
+const profileSideNav = [
+	{ id: 0, label: "Account", link: "/profile/account" },
+	{ id: 1, label: "Subscription", link: "/profile/subscription" },
+	{ id: 2, label: "Notification", link: "/profile/notification" },
+];
+
+export {
+	features,
+	navigation,
+	profileSideNav,
+	sideNavItems,
+	socials,
+	thirdPartyIntegrations,
+};

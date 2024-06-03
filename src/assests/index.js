@@ -27,4 +27,5 @@ export { default as History } from "./icons/History.svg";
 export { default as Home } from "./icons/Home.svg";
 export { default as Library } from "./icons/Library.svg";
 export { default as Plus } from "./icons/Plus.svg";
-
+//action-icons-svg
+export { default as Exit } from "./icons/Exit.svg";
