@@ -7,6 +7,7 @@ import {
 	LogIn,
 	NotFound404,
 	Pricing,
+	Profile,
 	Roadmap,
 	SignUp,
 } from "./pages";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
 	{
 		path: "/dashboard",
 		element: <Dashboard />,
+	},
+	{
+		path: "/profile",
+		element: <Profile />,
 	},
 	{
 		path: "/integrations",
