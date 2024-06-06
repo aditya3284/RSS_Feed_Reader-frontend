@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { Navigate, useLoaderData, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import useUserContext from "../hooks/useUserContext";
 const ProtectedRoute = ({ children }) => {
-	const authed = useLoaderData();
+	const { authed } = useUserContext();
 	const location = useLocation();
 
 	return authed ? (
@@ -9,10 +10,6 @@ const ProtectedRoute = ({ children }) => {
 	) : (
 		<Navigate to='/login' replace={true} state={{ path: location.pathname }} />
 	);
-};
-
-export const loader = () => {
-	return Boolean(localStorage.getItem("user"));
 };
 
 ProtectedRoute.propTypes = {

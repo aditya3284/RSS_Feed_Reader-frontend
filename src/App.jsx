@@ -1,7 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ProtectedRoute, {
-	loader as ProtectedRouteLoader,
-} from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import {
 	Blog,
 	Dashboard,
@@ -36,7 +34,6 @@ const router = createBrowserRouter([
 				<Dashboard />
 			</ProtectedRoute>
 		),
-		loader: ProtectedRouteLoader,
 	},
 	{
 		path: "/profile",
@@ -45,7 +42,6 @@ const router = createBrowserRouter([
 				<Profile />
 			</ProtectedRoute>
 		),
-		loader: ProtectedRouteLoader,
 	},
 	{
 		path: "/integrations",
