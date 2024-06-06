@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "../components/ui/Button";
 import useLogIn from "../hooks/useLogIn";
@@ -10,6 +10,7 @@ const LogInForm = () => {
 	const userPassword = useRef(null);
 	const { logIn, isloading, error } = useLogIn();
 	const navigate = useNavigate();
+	const { state } = useLocation();
 
 	async function handleFormSubmit(e) {
 		e.preventDefault();
@@ -18,7 +19,7 @@ const LogInForm = () => {
 			userPassword.current.value
 		);
 
-		if (loggedIn) navigate("/");
+		if (loggedIn) navigate(state?.path || "/");
 	}
 
 	return (
@@ -97,9 +98,10 @@ const LogInForm = () => {
 
 const LogIn = () => {
 	const { authed } = useUserContext();
+	const { state } = useLocation();
 
 	return authed ? (
-		<Navigate to={"/blog"} />
+		<Navigate to={state?.path || "/blog"} />
 	) : (
 		<>
 			<main>
