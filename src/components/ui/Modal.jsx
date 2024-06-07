@@ -1,8 +1,21 @@
 import PropTypes from "prop-types";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 
 const Modal = forwardRef(function Modal({ children, className, modalId }, ref) {
 	const classes = `modal ${className || ""}`;
+
+	useEffect(() => {
+		const modal = document.getElementById(modalId);
+		const handleModalClose = (event) => {
+			// event.composedPath()[0] === modal && modal.close();
+			event.target === modal && modal.close();
+		};
+
+		modal.addEventListener("click", handleModalClose);
+		return () => {
+			modal.removeEventListener("click", handleModalClose);
+		};
+	}, [modalId]);
 
 	return (
 		<dialog id={modalId} ref={ref} className={classes}>
