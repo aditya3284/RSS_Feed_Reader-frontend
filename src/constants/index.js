@@ -11,6 +11,8 @@ import {
 	discordBlack,
 	discordColor,
 	facebook,
+	heroPeep_1,
+	heroPeep_2,
 	instagram,
 	notionColor,
 	telegram,
@@ -231,6 +233,54 @@ const sideNavItems = [
 	},
 ];
 
+const dummyFeedItemData = [
+	{
+		id: 0,
+		title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+		thumbnail: heroPeep_1,
+	},
+	{
+		id: 1,
+		title: "Perspiciatis neque repellendus nihil officia ipsum non quo",
+		thumbnail: heroPeep_2,
+	},
+	{
+		id: 2,
+		title: "Quis dolores magnam earum in",
+		thumbnail: heroPeep_1,
+	},
+	{
+		id: 3,
+		title: "Dolor totam dignissimos et vel facilis exercitationem",
+		thumbnail: heroPeep_2,
+	},
+	{
+		id: 4,
+		title: "Necessitatibus, est aliquid iure qui velit quas!",
+		thumbnail: heroPeep_1,
+	},
+	{
+		id: 5,
+		title: "Voluptatem possimus deleniti et praesentium!",
+		thumbnail: heroPeep_2,
+	},
+	{
+		id: 6,
+		title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+		thumbnail: heroPeep_1,
+	},
+	{
+		id: 7,
+		title: "Quis dolores magnam earum in",
+		thumbnail: heroPeep_2,
+	},
+	{
+		id: 8,
+		title: "Dolor totam dignissimos et vel facilis exercitationem",
+		thumbnail: heroPeep_1,
+	},
+];
+
 const profileSideNav = [
 	{ id: 0, label: "Account", link: "/profile/account" },
 	{ id: 1, label: "Subscription", link: "/profile/subscription" },
@@ -238,6 +288,7 @@ const profileSideNav = [
 ];
 
 export {
+	dummyFeedItemData,
 	features,
 	navigation,
 	profileSideNav,
