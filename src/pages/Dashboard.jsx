@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Plus } from "../assests";
 import Logo from "../components/Logo";
@@ -19,6 +19,25 @@ import DashboardLayout from "../layouts/SidebarLayout";
 const Dashboard = () => {
 	const addFeedModal = useRef(null);
 	const topRef = useRef(null);
+	const [isLoading, setIsLaoding] = useState(false);
+
+	const handleAddFeed = async (event) => {
+		event.preventDefault();
+		setIsLaoding(true);
+
+		const formData = new FormData(event.target);
+		const data = Object.fromEntries(formData);
+
+		const response = await fetch("/api/v1/feed/submit", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data),
+		});
+
+		if (response.ok) {
+			addFeedModal.current.close();
+		} else setIsLaoding(false);
+	};
 
 	return (
 		<DashboardLayout list={sideNavItems}>
@@ -119,7 +138,7 @@ const Dashboard = () => {
 					<ModalDescription className='text-balance px-5'>
 						Here you can provide the link from which the feed can be added
 					</ModalDescription>
-					<form className='grid gap-4 px-10'>
+					<form onSubmit={handleAddFeed} className='grid gap-4 px-10'>
 						<label htmlFor='feedUrlInput' className='font-bold'>
 							Enter the RSS Feed URL
 						</label>
@@ -133,7 +152,7 @@ const Dashboard = () => {
 						<input
 							type='submit'
 							className='mx-auto w-fit rounded-lg bg-purple-600 px-2 py-1.5'
-							value={"loading"}
+							value={isLoading ? "Loading..." : "Add Feed"}
 						/>
 					</form>
 				</ModalContent>
