@@ -3,6 +3,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import {
 	Blog,
 	Dashboard,
+	DashboardHome,
 	Home,
 	Integrations,
 	LogIn,
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
 				<Dashboard />
 			</ProtectedRoute>
 		),
+		children: [
+			{
+				path: "/dashboard/home",
+				element: <DashboardHome />,
+			},
+		],
 	},
 	{
 		path: "/profile",

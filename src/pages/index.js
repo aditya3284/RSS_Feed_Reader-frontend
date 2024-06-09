@@ -8,3 +8,5 @@ export { default as Pricing } from "./Pricing";
 export { default as Profile } from "./Profile";
 export { default as Roadmap } from "./Roadmap";
 export { default as SignUp } from "./SignUp";
+//dashboard sub-pages
+export { default as DashboardHome } from "./dashboard/Home";
