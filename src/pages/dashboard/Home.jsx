@@ -71,12 +71,14 @@ const Home = () => {
 				<section aria-label='Recent Posts'>
 					<header className='mb-5 flex items-center justify-between'>
 						<h2 className='h3 font-extrabold'>Recent</h2>
-						<Button
-							href='/dashboard/recent'
-							className='h-6 hover:text-s-4 dark:text-s-1 dark:hover:text-s-3'
-						>
-							View All
-						</Button>
+						{recentPosts.length > 0 && (
+							<Button
+								href='/dashboard/recent'
+								className='h-6 hover:text-s-4 dark:text-s-1 dark:hover:text-s-3'
+							>
+								View All
+							</Button>
+						)}
 					</header>
 					{loadingPosts ? (
 						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
@@ -92,7 +94,7 @@ const Home = () => {
 								</DashboardCard>
 							))}
 						</div>
-					) : (
+					) : recentPosts.length > 0 ? (
 						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
 							{recentPosts.map(({ _id, thumbnailUrl, title }) => (
 								<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
@@ -113,6 +115,13 @@ const Home = () => {
 									</DashboardCardContent>
 								</DashboardCard>
 							))}
+						</div>
+					) : (
+						<div className='my-20 text-center'>
+							<h3 className='h3 font-bold'>
+								No post available. <br />
+								Add Feed to get posts
+							</h3>
 						</div>
 					)}
 				</section>
@@ -137,7 +146,7 @@ const Home = () => {
 					</h2>
 					{loadingCreators ? (
 						<p>Creators Loading...</p>
-					) : (
+					) : creatorList.length > 0 ? (
 						<ol>
 							{creatorList.map(({ _id, name, icon }) => (
 								<li key={_id}>
@@ -154,6 +163,14 @@ const Home = () => {
 								</li>
 							))}
 						</ol>
+					) : (
+						<div className='my-20 text-center'>
+							<h4 className='h3 font-bold'>
+								No Creators available.
+								<br />
+								Add Feed to get creators
+							</h4>
+						</div>
 					)}
 				</div>
 			</div>
