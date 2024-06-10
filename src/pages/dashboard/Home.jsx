@@ -13,12 +13,13 @@ import { dummyFeedItemData } from "../../constants";
 const Home = () => {
 	document.querySelector("title").text = "Dashboard";
 	const [loadingPosts, setLoadingPosts] = useState(true);
-	const [loadingCreators] = useState(true);
+	const [loadingCreators, setLoadingCreators] = useState(true);
 	const [recentPosts, setRecentPosts] = useState([]);
-	const [creatorList] = useState([]);
+	const [creatorList, setCreatorList] = useState([]);
 
 	useEffect(() => {
 		fetchRecentPosts();
+		fetchCreators();
 	}, []);
 
 	const fetchRecentPosts = async () => {
@@ -30,6 +31,23 @@ const Home = () => {
 			if (response.ok) {
 				setRecentPosts([...data.data.feedItemsList]);
 				setLoadingPosts(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const fetchCreators = async () => {
+		try {
+			const userID = JSON.parse(localStorage.getItem("user")).username;
+
+			const response = await fetch(`/api/v1/feed/u/${userID}`, {
+				method: "GET",
+			});
+			const data = await response.json();
+			if (response.ok) {
+				setCreatorList([...data.data.Feeds]);
+				setLoadingCreators(false);
 			}
 		} catch (error) {
 			console.log(error);
