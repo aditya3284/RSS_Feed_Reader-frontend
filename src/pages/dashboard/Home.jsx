@@ -1,8 +1,21 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import Button from "../../components/ui/Button";
+import {
+	DashboardCard,
+	DashboardCardContent,
+	DashboardCardDescription,
+	DashboardCardHeader,
+} from "../../components/ui/DashboardCard";
+import { dummyFeedItemData } from "../../constants";
 
 const Home = () => {
 	document.querySelector("title").text = "Dashboard";
+	const [loadingPosts] = useState(true);
+	const [loadingCreators] = useState(true);
+	const [recentPosts] = useState([]);
+	const [creatorList] = useState([]);
 
 	return (
 		<div className='grid h-full gap-2 lg:grid-cols-[70%,30%]'>
@@ -28,7 +41,43 @@ const Home = () => {
 							View All
 						</Button>
 					</header>
-					Posts
+					{loadingPosts ? (
+						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+							{dummyFeedItemData.map(({ id }) => (
+								<DashboardCard
+									key={id}
+									className='grid w-full grid-rows-[1.8fr,1fr] bg-s-2 dark:bg-s-6'
+								>
+									<DashboardCardHeader className='grid h-full place-items-center bg-s-5'></DashboardCardHeader>
+									<DashboardCardContent className='py-8'>
+										<DashboardCardDescription className='h-5 rounded-full bg-s-5  text-s-8 dark:text-s-3'></DashboardCardDescription>
+									</DashboardCardContent>
+								</DashboardCard>
+							))}
+						</div>
+					) : (
+						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+							{recentPosts.map(({ _id, thumbnailUrl, title }) => (
+								<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
+									<DashboardCardHeader feedItemID={_id} className=''>
+										<img
+											src={thumbnailUrl}
+											alt=''
+											width={480}
+											height={360}
+											className='aspect-video bg-s-4 object-cover'
+											loading='lazy'
+										/>
+									</DashboardCardHeader>
+									<DashboardCardContent feedItemID={_id} className=''>
+										<DashboardCardDescription className=' text-s-8 dark:text-s-3'>
+											{title}
+										</DashboardCardDescription>
+									</DashboardCardContent>
+								</DashboardCard>
+							))}
+						</div>
+					)}
 				</section>
 			</div>
 			<div className='rounded-xl'>
@@ -49,7 +98,26 @@ const Home = () => {
 					<h2 className='mb-10 text-2xl font-bold text-s-8 dark:text-s-1'>
 						Creators
 					</h2>
-					creators list
+					{loadingCreators ? (
+						<p>Creators Loading...</p>
+					) : (
+						<ol>
+							{creatorList.map(({ _id, name, icon }) => (
+								<li key={_id}>
+									<Link to={`/feeds/${_id}`} className='my-5 flex gap-5'>
+										<img
+											src={icon.URL}
+											width={40}
+											height={40}
+											className='aspect-square rounded-xl bg-p-2 object-cover'
+											loading='lazy'
+										/>
+										<h4 className='line-clamp-1 text-left'>{name}</h4>
+									</Link>
+								</li>
+							))}
+						</ol>
+					)}
 				</div>
 			</div>
 		</div>
