@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import Button from "../../components/ui/Button";
@@ -12,10 +12,29 @@ import { dummyFeedItemData } from "../../constants";
 
 const Home = () => {
 	document.querySelector("title").text = "Dashboard";
-	const [loadingPosts] = useState(true);
+	const [loadingPosts, setLoadingPosts] = useState(true);
 	const [loadingCreators] = useState(true);
-	const [recentPosts] = useState([]);
+	const [recentPosts, setRecentPosts] = useState([]);
 	const [creatorList] = useState([]);
+
+	useEffect(() => {
+		fetchRecentPosts();
+	}, []);
+
+	const fetchRecentPosts = async () => {
+		try {
+			const response = await fetch("/api/v1/user/all/items", {
+				method: "GET",
+			});
+			const data = await response.json();
+			if (response.ok) {
+				setRecentPosts([...data.data.feedItemsList]);
+				setLoadingPosts(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div className='grid h-full gap-2 lg:grid-cols-[70%,30%]'>
