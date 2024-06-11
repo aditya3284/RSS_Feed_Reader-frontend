@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
@@ -6,17 +8,18 @@ import {
 	DashboardCardHeader,
 	DashboardCardTitle,
 } from "../../components/ui/DashboardCard";
-import { dummyFeedItemData } from "../../constants";
 
 const History = () => {
 	document.querySelector("title").text = "History";
+	const { data } = useLoaderData();
+	const [feedItemsHistory] = useState(data);
 
 	return (
 		<div className='p-5'>
-			{dummyFeedItemData.length > 0 ? (
+			{feedItemsHistory.length > 0 ? (
 				<>
 					<h1 className='text-3xl font-bold text-s-8 dark:text-s-1'>History</h1>
-					{dummyFeedItemData.map(({ heading, history, _id }) => (
+					{feedItemsHistory.map(({ heading, history, _id }) => (
 						<section key={_id}>
 							<h2 className='my-5 text-2xl font-semibold'>{heading}</h2>
 							<ul className='grid gap-5 md:grid-cols-2'>
@@ -64,5 +67,18 @@ const History = () => {
 		</div>
 	);
 };
+
+export async function loader() {
+	if (localStorage.getItem("user")) {
+		const response = await fetch("/api/v1/user/history/read", {
+			method: "GET",
+		});
+		const data = await response.json();
+
+		return response.ok && data.data ? data : { data: { readHistory: [] } };
+	}
+
+	return null;
+}
 
 export default History;
