@@ -4,6 +4,7 @@ import {
 	Blog,
 	Dashboard,
 	DashboardHome,
+	History,
 	Home,
 	Integrations,
 	LogIn,
@@ -13,6 +14,7 @@ import {
 	Roadmap,
 	SignUp,
 } from "./pages";
+import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +41,11 @@ const router = createBrowserRouter([
 			{
 				path: "/dashboard/home",
 				element: <DashboardHome />,
+			},
+			{
+				path: "/dashboard/history",
+				element: <History />,
+				loader: HistoryDashboardLoader,
 			},
 		],
 	},
