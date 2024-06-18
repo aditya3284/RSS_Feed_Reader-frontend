@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	DashboardCard,
@@ -9,10 +9,47 @@ import {
 
 const Library = () => {
 	document.querySelector("title").text = "Library";
-	const [loadingPosts] = useState(true);
-	const [loadingCreators] = useState(true);
-	const [recentPosts] = useState([]);
-	const [creatorList] = useState([]);
+	const [loadingPosts, setLoadingPosts] = useState(true);
+	const [loadingCreators, setLoadingCreators] = useState(true);
+	const [uploads, setUploads] = useState([]);
+	const [creatorList, setCreatorList] = useState([]);
+
+	useEffect(() => {
+		fetchUploads();
+		fetchCreators();
+	}, []);
+
+	const fetchUploads = async () => {
+		try {
+			const response = await fetch("/api/v1/user/all/items", {
+				method: "GET",
+			});
+			const data = await response.json();
+			if (response.ok) {
+				setUploads([...data.data.feedItemsList]);
+				setLoadingPosts(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const fetchCreators = async () => {
+		try {
+			const userID = JSON.parse(localStorage.getItem("user")).username;
+
+			const response = await fetch(`/api/v1/feed/u/${userID}`, {
+				method: "GET",
+			});
+			const data = await response.json();
+			if (response.ok) {
+				setCreatorList([...data.data.Feeds]);
+				setLoadingCreators(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div className='p-5'>
@@ -58,9 +95,9 @@ const Library = () => {
 				</h2>
 				{loadingPosts ? (
 					<p className='h3 my-20 font-bold'>loading...</p>
-				) : recentPosts.length > 0 ? (
+				) : uploads.length > 0 ? (
 					<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-						{recentPosts.map(({ _id, thumbnailUrl, title }) => (
+						{uploads.map(({ _id, thumbnailUrl, title }) => (
 							<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
 								<DashboardCardHeader feedItemID={_id} className=''>
 									<img
