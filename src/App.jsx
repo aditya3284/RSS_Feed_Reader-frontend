@@ -7,6 +7,8 @@ import {
 	History,
 	Home,
 	Integrations,
+	Library,
+	Liked,
 	LogIn,
 	NotFound404,
 	Pricing,
@@ -15,6 +17,7 @@ import {
 	SignUp,
 } from "./pages";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
+import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
 
 const router = createBrowserRouter([
 	{
@@ -46,6 +49,15 @@ const router = createBrowserRouter([
 				path: "/dashboard/history",
 				element: <History />,
 				loader: HistoryDashboardLoader,
+			},
+			{
+				path: "/dashboard/liked",
+				element: <Liked />,
+				loader: LikedItemsDashboardLoader,
+			},
+			{
+				path: "/dashboard/library",
+				element: <Library />,
 			},
 		],
 	},
