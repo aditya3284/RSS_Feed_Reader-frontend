@@ -52,4 +52,17 @@ const Liked = () => {
 	);
 };
 
+export async function loader() {
+	if (localStorage.getItem("user")) {
+		const response = await fetch("/api/v1/user/liked/items?limit=6&offset=0", {
+			method: "GET",
+		});
+		const data = await response.json();
+
+		return response.ok ? data : { data: { likedFeedItemsList: [] } };
+	}
+
+	return null;
+}
+
 export default Liked;
