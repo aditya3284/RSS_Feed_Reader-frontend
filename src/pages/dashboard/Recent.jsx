@@ -52,4 +52,17 @@ const Recent = () => {
 	);
 };
 
+export async function loader() {
+	if (localStorage.getItem("user")) {
+		const response = await fetch("/api/v1/user/all/items", {
+			method: "GET",
+		});
+		const data = await response.json();
+
+		return response.ok && data.data ? data : { data: { feedItemsList: [] } };
+	}
+
+	return null;
+}
+
 export default Recent;
