@@ -13,3 +13,4 @@ export { default as History } from "./dashboard/History";
 export { default as DashboardHome } from "./dashboard/Home";
 export { default as Library } from "./dashboard/Library";
 export { default as Liked } from "./dashboard/Liked";
+export { default as Recent } from "./dashboard/Recent";

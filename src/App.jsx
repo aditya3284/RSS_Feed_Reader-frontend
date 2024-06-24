@@ -13,6 +13,7 @@ import {
 	NotFound404,
 	Pricing,
 	Profile,
+	Recent,
 	Roadmap,
 	SignUp,
 } from "./pages";
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
 				path: "/dashboard/history",
 				element: <History />,
 				loader: HistoryDashboardLoader,
+			},
+			{
+				path: "/dashboard/recent",
+				element: <Recent />,
 			},
 			{
 				path: "/dashboard/liked",
