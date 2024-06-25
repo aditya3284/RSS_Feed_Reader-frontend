@@ -18,7 +18,9 @@ import {
 	SignUp,
 } from "./pages";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
+import DashboardIndex from "./pages/dashboard/Index";
 import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
+import { loader as RecentDashboardLoader } from "./pages/dashboard/Recent";
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
 			</ProtectedRoute>
 		),
 		children: [
+			{ index: true, element: <DashboardIndex /> },
 			{
 				path: "/dashboard/home",
 				element: <DashboardHome />,
@@ -54,6 +57,7 @@ const router = createBrowserRouter([
 			{
 				path: "/dashboard/recent",
 				element: <Recent />,
+				loader: RecentDashboardLoader,
 			},
 			{
 				path: "/dashboard/liked",
