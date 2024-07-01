@@ -11,13 +11,62 @@ const Account = () => {
 		<MaxWidthContainer>
 			<div className='mx-auto my-10 grid max-w-2xl gap-12 text-s-7 dark:text-s-2'>
 				<section aria-label='profile information'>
-					<div className='size-40 rounded-full bg-s-3 dark:bg-black'>
+					<div className='relative size-40 overflow-hidden rounded-full bg-s-3 dark:bg-black'>
 						<img
-							src={heroPeep_1}
+							src={userProfileDetails?.profilePicture?.URL ?? heroPeep_1}
 							alt=''
 							className='aspect-square object-cover'
 							loading='lazy'
 						/>
+						<div className='absolute inset-0 rounded-full'>
+							<div className='grid size-full place-items-center overflow-clip rounded-full bg-s-2/60 opacity-0 backdrop-blur-sm transition-opacity hover:opacity-100 dark:bg-black/60'>
+								{userProfileDetails?.profilePicture?.URL ? (
+									<>
+										<form
+											encType='multipart/form-data'
+											className='grid size-full select-none place-content-center font-bold'
+										>
+											<label
+												htmlFor='changeAvatarInput'
+												className='cursor-pointer'
+											>
+												Change
+											</label>
+											<input
+												type='file'
+												accept='image/png,image/jpeg,image/jpg,image/webp'
+												id='changeAvatarInput'
+												name='profilePictureToUpdate'
+												hidden
+											/>
+										</form>
+
+										<button className='size-full select-none font-bold'>
+											<span>Delete</span>
+										</button>
+									</>
+								) : (
+									<form
+										encType='multipart/form-data'
+										className='grid size-full select-none place-content-center font-bold'
+									>
+										<label
+											htmlFor='avatarInput'
+											className='cursor-pointer px-9 py-14'
+										>
+											Add Avatar
+										</label>
+										<input
+											type='file'
+											accept='image/png,image/jpeg,image/jpg,image/webp'
+											id='avatarInput'
+											name='profilePictureToUpdate'
+											hidden
+										/>
+									</form>
+								)}
+							</div>
+						</div>
 					</div>
 					<div className=''>
 						<h1 className='line-clamp-1 max-w-lg text-3xl font-bold dark:text-s-1'>
