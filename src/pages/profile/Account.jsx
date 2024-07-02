@@ -5,8 +5,27 @@ import MaxWidthContainer from "../../components/MaxWidthContainer";
 
 const Account = () => {
 	const { data } = useLoaderData();
-	const [userProfileDetails] = useState(data);
+	const [userProfileDetails, setUserProfileDetails] = useState(data);
 
+	const handleProfilePictureChange = async (event) => {
+		event.preventDefault();
+		const formData = new FormData();
+		formData.append("profilePictureToUpdate", event.target.files[0]);
+
+		const response = await fetch("/api/v1/user/profile/picture", {
+			method: "PATCH",
+			body: formData,
+		});
+
+		if (response.ok) {
+			const res = await response.json();
+			setUserProfileDetails({
+				...userProfileDetails,
+				...res?.data,
+			});
+			event.target.value = "";
+		}
+	};
 	return (
 		<MaxWidthContainer>
 			<div className='mx-auto my-10 grid max-w-2xl gap-12 text-s-7 dark:text-s-2'>
@@ -38,6 +57,7 @@ const Account = () => {
 												id='changeAvatarInput'
 												name='profilePictureToUpdate'
 												hidden
+												onChange={handleProfilePictureChange}
 											/>
 										</form>
 
@@ -62,6 +82,7 @@ const Account = () => {
 											id='avatarInput'
 											name='profilePictureToUpdate'
 											hidden
+											onChange={handleProfilePictureChange}
 										/>
 									</form>
 								)}

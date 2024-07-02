@@ -14,3 +14,5 @@ export { default as DashboardHome } from "./dashboard/Home";
 export { default as Library } from "./dashboard/Library";
 export { default as Liked } from "./dashboard/Liked";
 export { default as Recent } from "./dashboard/Recent";
+//profile sub-pages
+export { default as Account } from "./profile/Account";

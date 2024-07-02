@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import {
+	Account,
 	Blog,
 	Dashboard,
 	DashboardHome,
@@ -21,6 +22,7 @@ import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 import DashboardIndex from "./pages/dashboard/Index";
 import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
 import { loader as RecentDashboardLoader } from "./pages/dashboard/Recent";
+import { loader as AccountDashboardLoader } from "./pages/profile/Account";
 
 const router = createBrowserRouter([
 	{
@@ -77,6 +79,13 @@ const router = createBrowserRouter([
 				<Profile />
 			</ProtectedRoute>
 		),
+		children: [
+			{
+				path: "/profile/account",
+				element: <Account />,
+				loader: AccountDashboardLoader,
+			},
+		],
 	},
 	{
 		path: "/integrations",
