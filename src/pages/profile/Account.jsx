@@ -7,6 +7,19 @@ const Account = () => {
 	const { data } = useLoaderData();
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
 
+	const handleProfilePictureDeletion = async () => {
+		const response = await fetch("/api/v1/user/profile/picture", {
+			method: "DELETE",
+		});
+		if (response.ok) {
+			const res = await response.json();
+			setUserProfileDetails({
+				...userProfileDetails,
+				profilePicture: res?.data,
+			});
+		}
+	};
+
 	const handleProfilePictureChange = async (event) => {
 		event.preventDefault();
 		const formData = new FormData();
@@ -26,6 +39,7 @@ const Account = () => {
 			event.target.value = "";
 		}
 	};
+
 	return (
 		<MaxWidthContainer>
 			<div className='mx-auto my-10 grid max-w-2xl gap-12 text-s-7 dark:text-s-2'>
@@ -61,7 +75,10 @@ const Account = () => {
 											/>
 										</form>
 
-										<button className='size-full select-none font-bold'>
+										<button
+											className='size-full select-none font-bold'
+											onClick={handleProfilePictureDeletion}
+										>
 											<span>Delete</span>
 										</button>
 									</>
