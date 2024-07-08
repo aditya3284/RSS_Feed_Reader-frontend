@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import EditableDetails from "../../components/EditableDetails";
@@ -9,6 +9,27 @@ const Account = () => {
 	const { data } = useLoaderData();
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
 
+	useEffect(() => {
+		localStorage.setItem("user", JSON.stringify(userProfileDetails));
+	}, [userProfileDetails]);
+
+	const handleFormSubmit = async (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const data = Object.fromEntries(formData);
+
+		const response = await fetch("/api/v1/user/profile", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data),
+		});
+		if (response.ok) {
+			const res = await response.json();
+			setUserProfileDetails({ ...userProfileDetails, ...res?.data.user });
+			event.target[0].value = "";
+		}
+	};
+	
 	const handleProfilePictureDeletion = async () => {
 		const response = await fetch("/api/v1/user/profile/picture", {
 			method: "DELETE",
@@ -130,7 +151,10 @@ const Account = () => {
 							label='Name'
 							description={userProfileDetails.fullName}
 						>
-							<form className='grid grid-cols-[40%,60%]'>
+							<form
+								className='grid grid-cols-[40%,60%]'
+								onSubmit={handleFormSubmit}
+							>
 								<label htmlFor='name' className='text-lg font-medium'>
 									Name
 								</label>
@@ -156,7 +180,10 @@ const Account = () => {
 							label='Email address'
 							description={userProfileDetails.email}
 						>
-							<form className='grid grid-cols-[40%,60%]'>
+							<form
+								className='grid grid-cols-[40%,60%]'
+								onSubmit={handleFormSubmit}
+							>
 								<label htmlFor='email' className='text-lg font-medium'>
 									Email address
 								</label>
@@ -176,7 +203,10 @@ const Account = () => {
 							</form>
 						</EditableDetails>
 						<EditableDetails label='Password' description='••••••••••••'>
-							<form className='grid grid-cols-[45%,55%] gap-2'>
+							<form
+								className='grid grid-cols-[45%,55%] gap-2'
+								onSubmit={handleFormSubmit}
+							>
 								<label htmlFor='crnt-pswrd' className='text-lg font-medium'>
 									Current Password
 								</label>
@@ -225,7 +255,10 @@ const Account = () => {
 							label='Gender'
 							description={userProfileDetails.gender}
 						>
-							<form className='grid grid-cols-[40%,60%]'>
+							<form
+								className='grid grid-cols-[40%,60%]'
+								onSubmit={handleFormSubmit}
+							>
 								<label htmlFor='gender' className='text-lg font-medium'>
 									Gender
 								</label>
@@ -253,7 +286,10 @@ const Account = () => {
 								userProfileDetails.dateOfBirth
 							).toDateString()}
 						>
-							<form className='grid grid-cols-[40%,60%]'>
+							<form
+								className='grid grid-cols-[40%,60%]'
+								onSubmit={handleFormSubmit}
+							>
 								<label htmlFor='dob' className='text-lg font-medium'>
 									Date of Birth
 								</label>
