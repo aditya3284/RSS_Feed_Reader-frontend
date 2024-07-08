@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
+import EditableDetails from "../../components/EditableDetails";
 import MaxWidthContainer from "../../components/MaxWidthContainer";
+import Button from "../../components/ui/Button";
 
 const Account = () => {
 	const { data } = useLoaderData();
@@ -114,6 +116,162 @@ const Account = () => {
 							@{userProfileDetails.username}
 						</p>
 						<p className='text-sm'>{userProfileDetails.email}</p>
+					</div>
+				</section>
+				<section
+					aria-labelledby='personal-detail-heading'
+					className='grid gap-4'
+				>
+					<h2 id='personal-detail-heading' className='text-2xl font-bold'>
+						Personal details
+					</h2>
+					<div className='grid grid-flow-row divide-y'>
+						<EditableDetails
+							label='Name'
+							description={userProfileDetails.fullName}
+						>
+							<form className='grid grid-cols-[40%,60%]'>
+								<label htmlFor='name' className='text-lg font-medium'>
+									Name
+								</label>
+								<input
+									type='text'
+									name='fullName'
+									id='name'
+									autoComplete='name'
+									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+								/>
+								<button
+									type='submit'
+									className='bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'
+								>
+									Save
+								</button>
+								<span className='hidden text-red-600 peer-[:user-invalid]:block'>
+									Enter valid Name
+								</span>
+							</form>
+						</EditableDetails>
+						<EditableDetails
+							label='Email address'
+							description={userProfileDetails.email}
+						>
+							<form className='grid grid-cols-[40%,60%]'>
+								<label htmlFor='email' className='text-lg font-medium'>
+									Email address
+								</label>
+								<input
+									type='email'
+									name='email'
+									id='email'
+									autoComplete='email'
+									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+								/>
+								<Button className='bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'>
+									Save
+								</Button>
+								<span className='hidden text-red-600 peer-[:user-invalid]:block'>
+									Enter valid Email address
+								</span>
+							</form>
+						</EditableDetails>
+						<EditableDetails label='Password' description='••••••••••••'>
+							<form className='grid grid-cols-[45%,55%] gap-2'>
+								<label htmlFor='crnt-pswrd' className='text-lg font-medium'>
+									Current Password
+								</label>
+								<div className='relative'>
+									<input
+										type='password'
+										name='oldPassword'
+										id='crnt-pswrd'
+										autoComplete='current-password'
+										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+								</div>
+								<label htmlFor='new-pswrd' className='text-lg font-medium'>
+									New Password
+								</label>
+								<div className='relative'>
+									<input
+										type='password'
+										name='newPassword'
+										id='new-pswrd'
+										autoComplete='new-password'
+										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+								</div>
+								<label htmlFor='repeat-pswrd' className='text-lg font-medium'>
+									Repeat Password
+								</label>
+								<div className='relative'>
+									<input
+										type='password'
+										name='repeatPassword'
+										id='repeat-pswrd'
+										autoComplete='new-password'
+										className='peer h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+									<p className='hidden text-pink-700 peer-[:invalid]:block'>
+										New password and repeat password do not match
+									</p>
+								</div>
+								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+									Save
+								</Button>
+							</form>
+						</EditableDetails>
+						<EditableDetails
+							label='Gender'
+							description={userProfileDetails.gender}
+						>
+							<form className='grid grid-cols-[40%,60%]'>
+								<label htmlFor='gender' className='text-lg font-medium'>
+									Gender
+								</label>
+								<input
+									type='text'
+									list='gender-list'
+									name='gender'
+									id='gender'
+									autoComplete='sex'
+									className='h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+								/>
+								<datalist id='gender-list'>
+									<option value='Male'></option>
+									<option value='Female'></option>
+									<option value='Other'></option>
+								</datalist>
+								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+									Save
+								</Button>
+							</form>
+						</EditableDetails>
+						<EditableDetails
+							label='Date of Birth'
+							description={new Date(
+								userProfileDetails.dateOfBirth
+							).toDateString()}
+						>
+							<form className='grid grid-cols-[40%,60%]'>
+								<label htmlFor='dob' className='text-lg font-medium'>
+									Date of Birth
+								</label>
+								<input
+									type='date'
+									name='dateOfBirth'
+									id='dob'
+									autoComplete='bday'
+									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+								/>
+								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+									Save
+								</Button>
+								<span className='hidden peer-[:user-invalid]:block'>
+									Enter valid Date of Birth
+								</span>
+							</form>
+						</EditableDetails>
 					</div>
 				</section>
 			</div>
