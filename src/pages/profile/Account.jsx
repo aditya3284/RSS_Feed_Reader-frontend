@@ -8,6 +8,7 @@ import Button from "../../components/ui/Button";
 const Account = () => {
 	const { data } = useLoaderData();
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
+	const [newPassword, setNewPassword] = useState("");
 
 	useEffect(() => {
 		localStorage.setItem("user", JSON.stringify(userProfileDetails));
@@ -29,7 +30,32 @@ const Account = () => {
 			event.target[0].value = "";
 		}
 	};
-	
+
+	const handlePasswordChange = async (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+
+		if (formData.get("repeatPassword") === formData.get("newPassword")) {
+			formData.delete("repeatPassword");
+
+			const response = await fetch("/api/v1/user/profile/password", {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(Object.fromEntries(formData)),
+			});
+
+			if (response.ok) {
+				await response.json();
+				const allElements = event.target.elements;
+				for (let element of allElements) {
+					if (element.tagName === "INPUT") {
+						element.value = "";
+					}
+				}
+			}
+		}
+	};
+
 	const handleProfilePictureDeletion = async () => {
 		const response = await fetch("/api/v1/user/profile/picture", {
 			method: "DELETE",
@@ -205,7 +231,7 @@ const Account = () => {
 						<EditableDetails label='Password' description='••••••••••••'>
 							<form
 								className='grid grid-cols-[45%,55%] gap-2'
-								onSubmit={handleFormSubmit}
+								onSubmit={handlePasswordChange}
 							>
 								<label htmlFor='crnt-pswrd' className='text-lg font-medium'>
 									Current Password
@@ -229,6 +255,7 @@ const Account = () => {
 										id='new-pswrd'
 										autoComplete='new-password'
 										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+										onChange={(event) => setNewPassword(event.target.value)}
 									/>
 								</div>
 								<label htmlFor='repeat-pswrd' className='text-lg font-medium'>
@@ -240,6 +267,7 @@ const Account = () => {
 										name='repeatPassword'
 										id='repeat-pswrd'
 										autoComplete='new-password'
+										pattern={newPassword}
 										className='peer h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
 									/>
 									<p className='hidden text-pink-700 peer-[:invalid]:block'>
