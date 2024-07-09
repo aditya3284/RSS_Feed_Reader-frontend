@@ -244,6 +244,17 @@ const Account = () => {
 										autoComplete='current-password'
 										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
 									/>
+									<Button
+										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
+										onClickFn={(e) => {
+											e.preventDefault();
+											const input = document.getElementById("crnt-pswrd");
+											input.type =
+												input.type === "password" ? "text" : "password";
+										}}
+									>
+										show
+									</Button>
 								</div>
 								<label htmlFor='new-pswrd' className='text-lg font-medium'>
 									New Password
@@ -257,6 +268,17 @@ const Account = () => {
 										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
 										onChange={(event) => setNewPassword(event.target.value)}
 									/>
+									<Button
+										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
+										onClickFn={(e) => {
+											e.preventDefault();
+											const input = document.getElementById("new-pswrd");
+											input.type =
+												input.type === "password" ? "text" : "password";
+										}}
+									>
+										show
+									</Button>
 								</div>
 								<label htmlFor='repeat-pswrd' className='text-lg font-medium'>
 									Repeat Password
@@ -270,6 +292,17 @@ const Account = () => {
 										pattern={newPassword}
 										className='peer h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
 									/>
+									<Button
+										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
+										onClickFn={(e) => {
+											e.preventDefault();
+											const input = document.getElementById("repeat-pswrd");
+											input.type =
+												input.type === "password" ? "text" : "password";
+										}}
+									>
+										show
+									</Button>
 									<p className='hidden text-pink-700 peer-[:invalid]:block'>
 										New password and repeat password do not match
 									</p>
