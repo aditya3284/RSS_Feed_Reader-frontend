@@ -1,17 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import EditableDetails from "../../components/EditableDetails";
 import MaxWidthContainer from "../../components/MaxWidthContainer";
 import Button from "../../components/ui/Button";
+import {
+	Modal,
+	ModalContent,
+	ModalDescription,
+	ModalFooter,
+	ModalHeader,
+	ModalTitle,
+} from "../../components/ui/Modal";
 
 const Account = () => {
 	const { data } = useLoaderData();
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
+	const deleteAccountModal = useRef(null);
 	const [newPassword, setNewPassword] = useState("");
 
 	const showDeletionConfirmation = () => {
-		console.log("delete");
+		deleteAccountModal.current.showModal();
 	};
 
 	useEffect(() => {
@@ -402,6 +411,27 @@ const Account = () => {
 					</div>
 				</section>
 			</div>
+			<Modal
+				modalId='confirmation-modal'
+				className='w-full text-center sm:max-w-md'
+				ref={deleteAccountModal}
+			>
+				<ModalHeader>
+					<ModalTitle>Are you sure?</ModalTitle>
+				</ModalHeader>
+				<ModalContent className='mt-5 grid gap-5'>
+					<ModalDescription className='px-4 pb-8 pt-3'>
+						Deleting your account is permanent and irreversible. You will lose
+						all your data and collections, if any.
+					</ModalDescription>
+				</ModalContent>
+				<ModalFooter className='flex justify-around'>
+					<Button onClickFn={(event) => event.target.offsetParent.close()}>
+						Cancel
+					</Button>
+					<Button className='text-red-600'>Delete Account</Button>
+				</ModalFooter>
+			</Modal>
 		</MaxWidthContainer>
 	);
 };
