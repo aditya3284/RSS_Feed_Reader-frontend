@@ -10,6 +10,10 @@ const Account = () => {
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
 	const [newPassword, setNewPassword] = useState("");
 
+	const showDeletionConfirmation = () => {
+		console.log("delete");
+	};
+
 	useEffect(() => {
 		localStorage.setItem("user", JSON.stringify(userProfileDetails));
 	}, [userProfileDetails]);
@@ -369,6 +373,32 @@ const Account = () => {
 								</span>
 							</form>
 						</EditableDetails>
+					</div>
+				</section>
+				<section
+					aria-labelledby='account-management-heading'
+					className='grid gap-4'
+				>
+					<h2 id='account-management-heading' className='text-2xl font-bold'>
+						Manage Account
+					</h2>
+					<div className='grid grid-flow-row divide-y'>
+						<section aria-labelledby='remove-account' className='py-3'>
+							<div className='mb-2 flex items-center justify-between'>
+								<div className=''>
+									<h3 className='text-xl font-semibold' id='remove-account'>
+										Delete account
+									</h3>
+									<p className='mr-4 mt-2'> Permanently delete your account.</p>
+								</div>
+								<Button
+									className='h-fit border bg-red-500 px-2.5 py-1.5 text-s-1 outline-offset-8 dark:border-red-600 dark:bg-transparent dark:text-red-600'
+									onClickFn={showDeletionConfirmation}
+								>
+									Delete
+								</Button>
+							</div>
+						</section>
 					</div>
 				</section>
 			</div>
