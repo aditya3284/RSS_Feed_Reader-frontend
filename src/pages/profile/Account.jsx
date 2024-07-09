@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import EditableDetails from "../../components/EditableDetails";
 import MaxWidthContainer from "../../components/MaxWidthContainer";
@@ -12,10 +12,13 @@ import {
 	ModalHeader,
 	ModalTitle,
 } from "../../components/ui/Modal";
+import useUserContext from "../../hooks/useUserContext";
 
 const Account = () => {
 	const { data } = useLoaderData();
 	const [userProfileDetails, setUserProfileDetails] = useState(data);
+	const { dispatch } = useUserContext();
+	const navigate = useNavigate();
 	const deleteAccountModal = useRef(null);
 	const [newPassword, setNewPassword] = useState("");
 
@@ -99,6 +102,17 @@ const Account = () => {
 				...res?.data,
 			});
 			event.target.value = "";
+		}
+	};
+
+	const handleAccountDeletion = async () => {
+		const response = await fetch("/api/v1/user/profile", {
+			method: "DELETE",
+		});
+
+		if (response.ok) {
+			dispatch({ type: "logout" });
+			navigate("/", { replace: true });
 		}
 	};
 
@@ -429,7 +443,9 @@ const Account = () => {
 					<Button onClickFn={(event) => event.target.offsetParent.close()}>
 						Cancel
 					</Button>
-					<Button className='text-red-600'>Delete Account</Button>
+					<Button onClickFn={handleAccountDeletion} className='text-red-600'>
+						Delete Account
+					</Button>
 				</ModalFooter>
 			</Modal>
 		</MaxWidthContainer>
