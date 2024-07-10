@@ -135,6 +135,42 @@ const thirdPartyIntegrations = {
 	],
 };
 
+const pricing = [
+	{
+		id: "0",
+		title: "Basic",
+		description: "AI chatbot, personalized recommendations",
+		price: "0",
+		features: [
+			"An feed reader that can understand your needs",
+			"Personalized feed based on your preferences",
+			"Ability to explore the app and its features without any cost",
+		],
+	},
+	{
+		id: "1",
+		title: "Premium",
+		description: "Advanced AI chatbot, priority support, analytics dashboard",
+		price: "9.99",
+		features: [
+			"An advanced feed reader that can fulfil complex needs",
+			"An analytics dashboard to track your choosen feeds",
+			"Priority support to solve issues quickly",
+		],
+	},
+	{
+		id: "2",
+		title: "Enterprise",
+		description: "Custom AI chatbot, advanced analytics, dedicated account",
+		price: null,
+		features: [
+			"An feed reader that can understand your needs",
+			"Personalized feed boards based on your preferences",
+			"Ability to explore the app and all its features without any hustle",
+		],
+	},
+];
+
 const features = [
 	{
 		id: "0",
@@ -291,6 +327,7 @@ export {
 	dummyFeedItemData,
 	features,
 	navigation,
+	pricing,
 	profileSideNav,
 	sideNavItems,
 	socials,
