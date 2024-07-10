@@ -17,6 +17,7 @@ import {
 	Recent,
 	Roadmap,
 	SignUp,
+	Subscription,
 } from "./pages";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 import DashboardIndex from "./pages/dashboard/Index";
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
 				path: "/profile/account",
 				element: <Account />,
 				loader: AccountDashboardLoader,
+			},
+			{
+				path: "/profile/subscription",
+				element: <Subscription />,
 			},
 		],
 	},
