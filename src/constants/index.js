@@ -323,11 +323,40 @@ const profileSideNav = [
 	{ id: 2, label: "Notification", link: "/profile/notification" },
 ];
 
+const profileNotificationList = [
+	{
+		id: "marketing",
+		label:
+			"marketing Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?",
+	},
+	{
+		id: "others",
+		label:
+			"Other Lorem ipsum, dolor sit amet consectetur adipisicing elit.Nostrum, laborum!",
+	},
+	{
+		id: "oki-dokie",
+		label:
+			"okie-dokie Lorem ipsum dolor sit amet consectetur adipisicing. elit Repudiandae.",
+	},
+	{
+		id: "walking",
+		label:
+			"walking Lorem ipsum dolor sit amet consectetur adipisicing elit.Accusantium.",
+	},
+	{
+		id: "momo",
+		label:
+			"momo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit.",
+	},
+];
+
 export {
 	dummyFeedItemData,
 	features,
 	navigation,
 	pricing,
+	profileNotificationList,
 	profileSideNav,
 	sideNavItems,
 	socials,
