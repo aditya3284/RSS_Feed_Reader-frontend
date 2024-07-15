@@ -12,6 +12,7 @@ import {
 	Liked,
 	LogIn,
 	NotFound404,
+	Notification,
 	Pricing,
 	Profile,
 	Recent,
@@ -24,6 +25,7 @@ import DashboardIndex from "./pages/dashboard/Index";
 import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
 import { loader as RecentDashboardLoader } from "./pages/dashboard/Recent";
 import { loader as AccountDashboardLoader } from "./pages/profile/Account";
+import ProfileIndex from "./pages/profile/Index";
 
 const router = createBrowserRouter([
 	{
@@ -81,6 +83,7 @@ const router = createBrowserRouter([
 			</ProtectedRoute>
 		),
 		children: [
+			{ index: true, element: <ProfileIndex /> },
 			{
 				path: "/profile/account",
 				element: <Account />,
@@ -89,6 +92,10 @@ const router = createBrowserRouter([
 			{
 				path: "/profile/subscription",
 				element: <Subscription />,
+			},
+			{
+				path: "/profile/notification",
+				element: <Notification />,
 			},
 		],
 	},
