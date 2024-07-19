@@ -10,7 +10,7 @@
 	* {
 		@apply m-0 box-border p-0;
 	}
-
+	
 	body {
 		@apply scroll-smooth bg-s-1 text-s-8 dark:bg-s-8 dark:text-s-1;
 	}
@@ -68,6 +68,29 @@
 	.card-footer {
 		@apply flex items-center p-6 pt-0 text-s-7 dark:text-s-1;
 	}
+	.dashboardCard {
+		@apply m-auto w-fit overflow-hidden rounded-xl  border border-s-3 text-[#09090b] dark:border-s-6;
+	}
+
+	.dashboardCard-header {
+		@apply flex flex-col space-y-1.5 text-s-7 dark:text-s-1;
+	}
+
+	.dashboardCard-title {
+		@apply font-semibold leading-none tracking-tight;
+	}
+
+	.dashboardCard-description {
+		@apply line-clamp-1 text-s-7 dark:text-[#71717a];
+	}
+
+	.dashboardCard-content {
+		@apply max-w-[480px] p-3;
+	}
+
+	.dashboardCard-footer {
+		@apply flex items-center p-6 pt-0 text-s-7 dark:text-s-1;
+	}
 
 	.modal {
 		@apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  rounded-xl backdrop:bg-s-4/85 dark:bg-slate-800 dark:text-s-2 dark:backdrop:bg-s-7/85;
@@ -80,5 +103,8 @@
 	}
 	.padding-hr {
 		@apply px-6 py-6 sm:px-28 sm:py-12;
+	}
+	.coming-soon {
+		@apply select-none blur-[2.5px];
 	}
 }
