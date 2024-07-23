@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import Tagline from "./Tagline";
 
 const Heading = ({ className, tagline, title, titleId, body }) => {
-	const classes = `max-w-[50rem] mx-auto mb-12 lg:mb-20 text-center ${className}`;
+	const classes = `max-w-[50rem] mx-auto mb-12 lg:mb-20 ${className}`;
 	return (
 		<div className={classes}>
 			{tagline && <Tagline className='mb-4'>{tagline}</Tagline>}
 			{title && (
-				<h2 id={titleId} className='h2 text-s-1'>
+				<h2 id={titleId} className='h2'>
 					{title}
 				</h2>
 			)}

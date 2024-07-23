@@ -16,4 +16,5 @@ export { default as Liked } from "./dashboard/Liked";
 export { default as Recent } from "./dashboard/Recent";
 //profile sub-pages
 export { default as Account } from "./profile/Account";
+export { default as Notification } from "./profile/Notification";
 export { default as Subscription } from "./profile/Subscription";
