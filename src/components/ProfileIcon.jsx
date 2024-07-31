@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { heroPeep_1 } from "../assests";
 import useLogOut from "../hooks/useLogOut";
@@ -9,6 +9,18 @@ const ProfileIcon = ({ showTitle, position, classes }) => {
 	const { logOut } = useLogOut();
 	const { user } = useUserContext();
 	const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
+
+	function handleClick(event) {
+		const menu = document.getElementById("profileIcon");
+		!event.composedPath().includes(menu) && setDropdownMenuOpen(false);
+	}
+
+	useEffect(() => {
+		document.body.addEventListener("click", handleClick);
+		return () => {
+			document.body.removeEventListener("click", handleClick);
+		};
+	}, [dropdownMenuOpen]);
 
 	return (
 		<button
