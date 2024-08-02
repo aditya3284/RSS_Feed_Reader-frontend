@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { navigation } from "../constants";
+import useUserContext from "../hooks/useUserContext";
 import Logo from "./Logo";
 import MaxWidthContainer from "./MaxWidthContainer";
+import ProfileIcon from "./ProfileIcon";
+import ThemeToggle from "./ThemeToggle";
 import Button from "./ui/Button";
 
 const Navbar = () => {
+	const { user } = useUserContext();
 	const [openNavigation, setOpenNavigation] = useState(false);
+
 	const handleMenuBtnClick = () => {
 		if (openNavigation) {
 			setOpenNavigation(false);
@@ -48,19 +53,26 @@ const Navbar = () => {
 					</nav>
 					<div className='flex gap-3'>
 						<div className='flex items-center justify-center gap-3 '>
-							<Link
-								to='/signup'
-								rel='noopener noreferrer'
-								className='font-sourceCodePro uppercase text-p-5 transition-colors hover:text-p-1 md:font-semibold'
-							>
-								New Account
-							</Link>
-							<Button
-								href='/login'
-								className='bg-p-5 px-2 py-1 uppercase tracking-tight text-s-7 hover:text-s-1 hover:ring-2 hover:ring-p-6 dark:bg-s-1 dark:hover:text-p-1'
-							>
-								Sign in
-							</Button>
+							{user ? (
+								<ProfileIcon showTitle={false} position='top-10' />
+							) : (
+								<div className='hidden items-center justify-center gap-2 md:flex'>
+									<Link
+										to='/signup'
+										rel='noopener noreferrer'
+										className='font-sourceCodePro uppercase text-p-5 transition-colors hover:text-p-1 md:font-semibold'
+									>
+										New Account
+									</Link>
+									<Button
+										href='/login'
+										className='bg-p-5 px-2 py-1 uppercase tracking-tight text-s-7 hover:text-s-1 hover:ring-2 hover:ring-p-6 dark:bg-s-1 dark:hover:text-p-1'
+									>
+										Sign in
+									</Button>
+								</div>
+							)}
+							<ThemeToggle showText={false} />
 						</div>
 						<Button
 							onClickFn={handleMenuBtnClick}
