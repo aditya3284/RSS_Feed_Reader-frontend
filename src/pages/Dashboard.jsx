@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Plus } from "../assests";
 import Logo from "../components/Logo";
+import ProfileIcon from "../components/ProfileIcon";
 import SecondarySideNav from "../components/SecondarySideNav";
 import Sidebar from "../components/Sidebar";
 import ThemeToggle from "../components/ThemeToggle";
@@ -91,6 +92,11 @@ const Dashboard = () => {
 						</li>
 					</ul>
 				</SecondarySideNav>
+				<ProfileIcon
+					showTitle={true}
+					position='bottom-full'
+					classes={"rounded-xl px-3 py-5 hover:bg-s-4 dark:hover:bg-s-8"}
+				/>
 			</Sidebar>
 			<div className='m-2 w-full rounded-xl bg-s-2/30 dark:bg-s-11'>
 				<span ref={topRef}></span>
