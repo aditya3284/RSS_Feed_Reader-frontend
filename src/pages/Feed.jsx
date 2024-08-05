@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Delete, Liked, NotLiked, OutBound } from "../assests";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -13,6 +13,7 @@ import {
 const Feed = () => {
 	const { data } = useLoaderData();
 	const [feedData, setFeedData] = useState(data);
+	const navigate = useNavigate();
 
 	document.querySelector("title").text = data.name
 		? `Feed: ${data.name}`
@@ -35,6 +36,16 @@ const Feed = () => {
 			}
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+	const handleFeedDeletion = async () => {
+		const response = await fetch(`/api/v1/feed/f/${feedData._id}`, {
+			method: "DELETE",
+		});
+
+		if (response.ok) {
+			navigate("/dashboard/home");
 		}
 	};
 
@@ -77,7 +88,11 @@ const Feed = () => {
 								className='rounded-xl p-[2px] hover:bg-s-3'
 							/>
 						</button>
-						<button title='Delete' disabled={feedData.name === "not found"}>
+						<button
+							title='Delete'
+							disabled={feedData.name === "not found"}
+							onClick={handleFeedDeletion}
+						>
 							<img
 								src={Delete}
 								width={35}
