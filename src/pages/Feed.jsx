@@ -12,11 +12,31 @@ import {
 
 const Feed = () => {
 	const { data } = useLoaderData();
-	const [feedData] = useState(data);
+	const [feedData, setFeedData] = useState(data);
 
 	document.querySelector("title").text = data.name
 		? `Feed: ${data.name}`
 		: "Feed Not Found";
+
+	const handleFeedLikeToggle = async () => {
+		try {
+			const response = await fetch("/api/v1/feed/like", {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					favorite: !feedData.favorite,
+					url: feedData.url,
+				}),
+			});
+
+			if (response.ok) {
+				const res = await response.json();
+				setFeedData({ ...feedData, ...res.data });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<>
@@ -45,7 +65,11 @@ const Feed = () => {
 						</div>
 					</div>
 					<div className=' flex gap-2'>
-						<button title='Like' disabled={feedData.name === "not found"}>
+						<button
+							title='Like'
+							disabled={feedData.name === "not found"}
+							onClick={handleFeedLikeToggle}
+						>
 							<img
 								src={feedData.favorite ? Liked : NotLiked}
 								width={40}
