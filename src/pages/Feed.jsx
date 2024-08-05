@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { Delete, Liked, NotLiked, OutBound } from "../assests";
+import { Delete, heroPeep_1, Liked, NotLiked, OutBound } from "../assests";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import {
@@ -49,12 +49,99 @@ const Feed = () => {
 		}
 	};
 
+	const handleFeedIconChange = async (event) => {
+		try {
+			event.preventDefault();
+			const formData = new FormData();
+			formData.append("feedIcon", event.target.files[0]);
+
+			const response = await fetch(`/api/v1/feed/icon/${feedData._id}`, {
+				method: "PATCH",
+				body: formData,
+			});
+
+			if (response.ok) {
+				const res = await response.json();
+				setFeedData({
+					...feedData,
+					...res?.data,
+				});
+				event.target.value = "";
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<main className=''>
 				<Navbar />
 				<div className='mx-auto my-10 h-full max-w-5xl px-5 '>
 					<div className='grid items-center gap-5'>
+						<div className='relative size-40 overflow-hidden rounded-lg bg-s-3 dark:bg-black'>
+							<img
+								src={feedData?.icon.URL ?? heroPeep_1}
+								alt=''
+								className='aspect-square object-cover'
+								loading='lazy'
+							/>
+							<div className='absolute inset-0 rounded-full'>
+								<div className='grid size-full place-items-center overflow-clip rounded-lg bg-s-2/60 opacity-0 backdrop-blur-sm transition-opacity hover:opacity-100 dark:bg-black/60'>
+									{feedData?.icon.URL ? (
+										<>
+											<form
+												encType='multipart/form-data'
+												className='grid size-full select-none place-content-center font-bold'
+											>
+												<label
+													htmlFor='changeFeedIcon'
+													className='cursor-pointer'
+												>
+													Change
+												</label>
+												<input
+													disabled={feedData.name === "not found"}
+													type='file'
+													accept='image/png,image/jpeg,image/jpg,image/webp'
+													id='changeFeedIcon'
+													name='feedIcon'
+													hidden
+													onChange={handleFeedIconChange}
+												/>
+											</form>
+											<button
+												disabled={feedData.name === "not found"}
+												className='size-full select-none font-bold'
+											>
+												<span>Delete</span>
+											</button>
+										</>
+									) : (
+										<form
+											encType='multipart/form-data'
+											className='grid size-full select-none place-content-center font-bold'
+										>
+											<label
+												htmlFor='feedIconInput'
+												className='cursor-pointer px-9 py-14'
+											>
+												Add Icon
+											</label>
+											<input
+												disabled={feedData.name === "not found"}
+												type='file'
+												accept='image/png,image/jpeg,image/jpg,image/webp'
+												id='feedIconInput'
+												name='feedIcon'
+												hidden
+												onChange={handleFeedIconChange}
+											/>
+										</form>
+									)}
+								</div>
+							</div>
+						</div>
 						<div className=''>
 							<h1 className=' text-pretty text-2xl font-bold sm:text-4xl'>
 								{feedData.name}
