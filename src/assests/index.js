@@ -28,4 +28,8 @@ export { default as Home } from "./icons/Home.svg";
 export { default as Library } from "./icons/Library.svg";
 export { default as Plus } from "./icons/Plus.svg";
 //action-icons-svg
+export { default as Delete } from "./icons/Delete.svg";
 export { default as Exit } from "./icons/Exit.svg";
+export { default as Liked } from "./icons/Liked.svg";
+export { default as NotLiked } from "./icons/NotLiked.svg";
+export { default as OutBound } from "./icons/OutArrow.svg";
