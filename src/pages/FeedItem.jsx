@@ -37,10 +37,22 @@ const FeedItem = () => {
 		<>
 			<main className=''>
 				<Navbar />
-				<div className='mx-auto text-center'>
+				<div className='mx-auto my-10 h-full max-w-5xl px-5 text-center'>
 					<h1 className='my-10 text-pretty text-2xl font-bold sm:text-4xl'>
 						{feedItemData.title}
 					</h1>
+					{feedItemData.url.includes("www.youtube.com/watch?v=") && (
+						<div className='my-10 aspect-video h-full w-full overflow-hidden'>
+							<iframe
+								className='h-full w-full'
+								src={`https://www.youtube-nocookie.com/embed/${feedItemData.url.slice(-11)}`}
+								title='YouTube video player'
+								allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+								referrerPolicy='strict-origin-when-cross-origin'
+								allowFullScreen
+							></iframe>
+						</div>
+					)}
 					<div className='my-6 flex justify-between'>
 						<div className='text-left'>
 							<Link
@@ -68,7 +80,9 @@ const FeedItem = () => {
 							/>
 						</button>
 					</div>
-					<p className='text-left md:text-xl'>{feedItemData.content}</p>
+					<p className='overflow-y-hidden whitespace-pre-wrap break-words text-left md:text-xl'>
+						{feedItemData.content}
+					</p>
 				</div>
 				<Footer />
 				<button
