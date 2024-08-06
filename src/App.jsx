@@ -6,6 +6,7 @@ import {
 	Dashboard,
 	DashboardHome,
 	Feed,
+	FeedItem,
 	History,
 	Home,
 	Integrations,
@@ -22,6 +23,7 @@ import {
 	Subscription,
 } from "./pages";
 import { loader as feedLoader } from "./pages/Feed";
+import { loader as feedItemLoader } from "./pages/FeedItem";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 import DashboardIndex from "./pages/dashboard/Index";
 import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
@@ -100,6 +102,11 @@ const router = createBrowserRouter([
 				element: <Notification />,
 			},
 		],
+	},
+	{
+		path: "/feed-items/:feedItemID",
+		element: <FeedItem />,
+		loader: feedItemLoader,
 	},
 	{
 		path: "/feeds/:feedID",
