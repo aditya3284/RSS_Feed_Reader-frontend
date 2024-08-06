@@ -1,6 +1,7 @@
 export { default as Blog } from "./Blog";
 export { default as Dashboard } from "./Dashboard";
 export { default as Feed } from "./Feed";
+export { default as FeedItem } from "./FeedItem";
 export { default as Home } from "./Home";
 export { default as Integrations } from "./Integrations";
 export { default as LogIn } from "./LogIn";
