@@ -5,6 +5,7 @@ import {
 	Blog,
 	Dashboard,
 	DashboardHome,
+	Feed,
 	History,
 	Home,
 	Integrations,
@@ -20,6 +21,7 @@ import {
 	SignUp,
 	Subscription,
 } from "./pages";
+import { loader as feedLoader } from "./pages/Feed";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 import DashboardIndex from "./pages/dashboard/Index";
 import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
@@ -98,6 +100,11 @@ const router = createBrowserRouter([
 				element: <Notification />,
 			},
 		],
+	},
+	{
+		path: "/feeds/:feedID",
+		element: <Feed />,
+		loader: feedLoader,
 	},
 	{
 		path: "/integrations",
