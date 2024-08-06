@@ -73,6 +73,23 @@ const Feed = () => {
 		}
 	};
 
+	const handleFeedIconDeletion = async () => {
+		try {
+			const response = await fetch(`/api/v1/feed/icon/${feedData._id}`, {
+				method: "DELETE",
+			});
+			if (response.ok) {
+				const res = await response.json();
+				setFeedData({
+					...feedData,
+					icon: res?.data,
+				});
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<main className=''>
@@ -113,6 +130,7 @@ const Feed = () => {
 											<button
 												disabled={feedData.name === "not found"}
 												className='size-full select-none font-bold'
+												onClick={handleFeedIconDeletion}
 											>
 												<span>Delete</span>
 											</button>
