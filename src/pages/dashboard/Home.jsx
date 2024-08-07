@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
-import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
 	DashboardCardContent,
@@ -14,12 +13,15 @@ const Home = () => {
 	document.querySelector("title").text = "Dashboard";
 	const [loadingPosts, setLoadingPosts] = useState(true);
 	const [loadingCreators, setLoadingCreators] = useState(true);
+	const [loadingLikedPost, setLoadingLikedPost] = useState(true);
 	const [recentPosts, setRecentPosts] = useState([]);
 	const [creatorList, setCreatorList] = useState([]);
+	const [likedPost, setLikedPost] = useState([]);
 
 	useEffect(() => {
 		fetchRecentPosts();
 		fetchCreators();
+		fetchLikedPosts();
 	}, []);
 
 	const fetchRecentPosts = async () => {
@@ -31,6 +33,24 @@ const Home = () => {
 			if (response.ok) {
 				setRecentPosts([...data.data.feedItemsList]);
 				setLoadingPosts(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const fetchLikedPosts = async () => {
+		try {
+			const response = await fetch(
+				"/api/v1/user/liked/items",
+				{
+					method: "GET",
+				}
+			);
+			const data = await response.json();
+			if (response.ok) {
+				setLikedPost([...data.data.likedFeedItemsList]);
+				setLoadingLikedPost(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -69,16 +89,8 @@ const Home = () => {
 					/>
 				</div>
 				<section aria-label='Recent Posts'>
-					<header className='mb-5 flex items-center justify-between'>
+					<header className='mb-5'>
 						<h2 className='h3 font-extrabold'>Recent</h2>
-						{recentPosts.length > 0 && (
-							<Button
-								href='/dashboard/recent'
-								className='h-6 hover:text-s-4 dark:text-s-1 dark:hover:text-s-3'
-							>
-								View All
-							</Button>
-						)}
 					</header>
 					{loadingPosts ? (
 						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
@@ -95,27 +107,35 @@ const Home = () => {
 							))}
 						</div>
 					) : recentPosts.length > 0 ? (
-						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-							{recentPosts.map(({ _id, thumbnailUrl, title }) => (
-								<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
-									<DashboardCardHeader feedItemID={_id} className=''>
-										<img
-											src={thumbnailUrl}
-											alt=''
-											width={480}
-											height={360}
-											className='aspect-video bg-s-4 object-cover'
-											loading='lazy'
-										/>
-									</DashboardCardHeader>
-									<DashboardCardContent feedItemID={_id} className=''>
-										<DashboardCardDescription className=' text-s-8 dark:text-s-3'>
-											{title}
-										</DashboardCardDescription>
-									</DashboardCardContent>
-								</DashboardCard>
-							))}
-						</div>
+						<>
+							<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+								{recentPosts.map(({ _id, thumbnailUrl, title }) => (
+									<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
+										<DashboardCardHeader feedItemID={_id} className=''>
+											<img
+												src={thumbnailUrl}
+												alt=''
+												width={480}
+												height={360}
+												className='aspect-video bg-s-4 object-cover'
+												loading='lazy'
+											/>
+										</DashboardCardHeader>
+										<DashboardCardContent feedItemID={_id} className=''>
+											<DashboardCardDescription className=' text-s-8 dark:text-s-3'>
+												{title}
+											</DashboardCardDescription>
+										</DashboardCardContent>
+									</DashboardCard>
+								))}
+							</div>
+							<Link
+								to='/dashboard/recent'
+								className='text-center hover:text-s-4 dark:text-s-1 dark:hover:text-s-3'
+							>
+								<p className='my-5 font-semibold'>View All</p>
+							</Link>
+						</>
 					) : (
 						<div className='my-20 text-center'>
 							<h3 className='h3 font-bold'>
@@ -127,18 +147,45 @@ const Home = () => {
 				</section>
 			</div>
 			<div className='rounded-xl'>
-				<div className='m-4 h-72 rounded-3xl  bg-black p-8 text-s-1'>
-					<h2 className='mb-10 text-xl font-bold'>Total Balance</h2>
-					<div className='text-lg font-bold text-s-3'>
-						<div className='mb-3 text-[36px] font-extrabold text-s-1'>
-							42,069.<span className='text-[28px]'>37</span>
-							<span className='ml-1 text-[20px]'>&nbsp;of</span>
+				<div className='m-5 rounded-2xl bg-black p-7 text-s-1'>
+					<h2 className='mb-10 text-2xl font-bold'>Liked</h2>
+					{loadingLikedPost ? (
+						<p>Liked Loading...</p>
+					) : likedPost.length > 0 ? (
+						<>
+							<ol>
+								{likedPost.map(({ _id, title, thumbnailUrl }) => (
+									<li key={_id}>
+										<Link to={`/feed-items/${_id}`} className='my-5 flex gap-5'>
+											<img
+												src={thumbnailUrl}
+												width={100}
+												height={30}
+												className='aspect-video rounded-xl bg-p-1 object-cover'
+												loading='lazy'
+											/>
+											<h4 className='line-clamp-2 py-4 text-left'>{title}</h4>
+										</Link>
+									</li>
+								))}
+							</ol>
+							{likedPost.length > 6 && (
+								<div className='text-center font-bold'>
+									<Link to='/dashboard/liked' className='hover:text-s-4'>
+										View All
+									</Link>
+								</div>
+							)}
+						</>
+					) : (
+						<div className='my-20 text-center'>
+							<h4 className='h3 font-bold text-inherit'>
+								No Liked post available.
+								<br />
+								Like feed posts to get posts
+							</h4>
 						</div>
-						10,00,000.00
-					</div>
-					<Button className='mt-10 w-full bg-s-1 px-2.5 py-2 text-center uppercase text-s-8'>
-						Add you Credits
-					</Button>
+					)}
 				</div>
 				<div className='m-5 rounded-2xl bg-p-5 px-7 py-5'>
 					<h2 className='mb-10 text-2xl font-bold text-s-8 dark:text-s-1'>
@@ -147,22 +194,31 @@ const Home = () => {
 					{loadingCreators ? (
 						<p>Creators Loading...</p>
 					) : creatorList.length > 0 ? (
-						<ol>
-							{creatorList.map(({ _id, name, icon }) => (
-								<li key={_id}>
-									<Link to={`/feeds/${_id}`} className='my-5 flex gap-5'>
-										<img
-											src={icon.URL}
-											width={40}
-											height={40}
-											className='aspect-square rounded-xl bg-p-2 object-cover'
-											loading='lazy'
-										/>
-										<h4 className='line-clamp-1 text-left'>{name}</h4>
-									</Link>
-								</li>
-							))}
-						</ol>
+						<>
+							<ol>
+								{creatorList.map(({ _id, name, icon }) => (
+									<li key={_id}>
+										<Link to={`/feeds/${_id}`} className='my-5 flex gap-5'>
+											<img
+												src={icon.URL}
+												width={40}
+												height={40}
+												className='aspect-square rounded-xl bg-p-2 object-cover'
+												loading='lazy'
+											/>
+											<h4 className='line-clamp-1 text-left font-semibold'>
+												{name}
+											</h4>
+										</Link>
+									</li>
+								))}
+							</ol>
+							<div className='text-center font-bold'>
+								<Link to='/dashboard/library' className='hover:text-purple-800'>
+									View All
+								</Link>
+							</div>
+						</>
 					) : (
 						<div className='my-20 text-center'>
 							<h4 className='h3 font-bold'>
