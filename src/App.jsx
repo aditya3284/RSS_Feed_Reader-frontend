@@ -26,7 +26,6 @@ import { loader as feedLoader } from "./pages/Feed";
 import { loader as feedItemLoader } from "./pages/FeedItem";
 import { loader as HistoryDashboardLoader } from "./pages/dashboard/History";
 import DashboardIndex from "./pages/dashboard/Index";
-import { loader as LikedItemsDashboardLoader } from "./pages/dashboard/Liked";
 import { loader as RecentDashboardLoader } from "./pages/dashboard/Recent";
 import { loader as AccountDashboardLoader } from "./pages/profile/Account";
 import ProfileIndex from "./pages/profile/Index";
@@ -71,7 +70,6 @@ const router = createBrowserRouter([
 			{
 				path: "/dashboard/liked",
 				element: <Liked />,
-				loader: LikedItemsDashboardLoader,
 			},
 			{
 				path: "/dashboard/library",

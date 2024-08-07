@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
@@ -11,9 +10,37 @@ import {
 
 const Liked = () => {
 	document.querySelector("title").text = "Liked";
-	const { data } = useLoaderData();
-	const [likedFeedItems] = useState(data.likedFeedItemsList);
+	const [likedFeedItems, setLikedFeedItems] = useState([]);
+	const [totalLikedItem, setTotalLikedItem] = useState(0);
+	const [offset, setOffest] = useState(0);
+	const [limit, setLimit] = useState(6);
 
+	useEffect(() => {
+		fetchLikedPosts(limit, offset);
+	}, [offset, limit]);
+
+	const fetchLikedPosts = async (limit, offset) => {
+		try {
+			const response = await fetch(
+				`/api/v1/user/liked/items?limit=${limit}&offset=${offset}`,
+				{
+					method: "GET",
+				}
+			);
+			const data = await response.json();
+			setLikedFeedItems(
+				response.ok ? [...likedFeedItems, ...data.data.likedFeedItemsList] : []
+			);
+			setTotalLikedItem(data.data.totalLikedFeedItem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	function handleLoadMoreItems() {
+		setOffest((prevOffset) => prevOffset + 6);
+		setLimit((prevLimit) => prevLimit + 6);
+	}
 
 	return (
 		<div className='p-5'>
@@ -51,7 +78,11 @@ const Liked = () => {
 							</li>
 						))}
 					</ul>
-					<Button>Load More</Button>
+					{totalLikedItem / likedFeedItems.length > 1 && (
+						<div className='my-6 text-center'>
+							<Button onClickFn={handleLoadMoreItems}>Load More</Button>
+						</div>
+					)}
 				</div>
 			) : (
 				<div className='mt-10 text-center'>
@@ -64,18 +95,5 @@ const Liked = () => {
 		</div>
 	);
 };
-
-export async function loader() {
-	if (localStorage.getItem("user")) {
-		const response = await fetch("/api/v1/user/liked/items?limit=6&offset=0", {
-			method: "GET",
-		});
-		const data = await response.json();
-
-		return response.ok ? data : { data: { likedFeedItemsList: [] } };
-	}
-
-	return null;
-}
 
 export default Liked;
