@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
 	DashboardCardContent,
@@ -13,20 +14,27 @@ const Library = () => {
 	const [loadingCreators, setLoadingCreators] = useState(true);
 	const [uploads, setUploads] = useState([]);
 	const [creatorList, setCreatorList] = useState([]);
+	const [totalUploadItems, setTotalUploadItems] = useState(0);
+	const [offset, setOffset] = useState(0);
+	const [limit, setLimit] = useState(9);
 
 	useEffect(() => {
-		fetchUploads();
+		fetchUploads(limit, offset);
 		fetchCreators();
-	}, []);
+	}, [offset, limit]);
 
-	const fetchUploads = async () => {
+	const fetchUploads = async (limit, offset) => {
 		try {
-			const response = await fetch("/api/v1/user/all/items", {
-				method: "GET",
-			});
+			const response = await fetch(
+				`/api/v1/user/all/items?limit=${limit}&offset=${offset}`,
+				{
+					method: "GET",
+				}
+			);
 			const data = await response.json();
 			if (response.ok) {
-				setUploads([...data.data.feedItemsList]);
+				setUploads([...uploads, ...data.data.feedItemsList]);
+				setTotalUploadItems(data.data.totalCount);
 				setLoadingPosts(false);
 			}
 		} catch (error) {
@@ -50,6 +58,11 @@ const Library = () => {
 			console.log(error);
 		}
 	};
+
+	function handleLoadMoreItems() {
+		setOffset((prevOffset) => prevOffset + limit);
+		setLimit(6);
+	}
 
 	return (
 		<div className='p-5'>
@@ -96,27 +109,37 @@ const Library = () => {
 				{loadingPosts ? (
 					<p className='h3 my-20 font-bold'>loading...</p>
 				) : uploads.length > 0 ? (
-					<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-						{uploads.map(({ _id, thumbnailUrl, title }) => (
-							<DashboardCard key={_id} className='bg-s-2 dark:bg-s-6'>
-								<DashboardCardHeader feedItemID={_id} className=''>
-									<img
-										src={thumbnailUrl}
-										alt=''
-										width={480}
-										height={360}
-										className='aspect-video bg-s-4 object-cover'
-										loading='lazy'
-									/>
-								</DashboardCardHeader>
-								<DashboardCardContent feedItemID={_id} className=''>
-									<DashboardCardTitle className='line-clamp-2 text-lg text-s-8 dark:text-s-3'>
-										{title}
-									</DashboardCardTitle>
-								</DashboardCardContent>
-							</DashboardCard>
-						))}
-					</div>
+					<>
+						<div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+							{uploads.map(({ _id, thumbnailUrl, title }) => (
+								<DashboardCard
+									key={_id}
+									className='bg-s-2 dark:bg-s-6'
+								>
+									<DashboardCardHeader feedItemID={_id} className=''>
+										<img
+											src={thumbnailUrl}
+											alt=''
+											width={480}
+											height={360}
+											className='aspect-video bg-s-4 object-cover'
+											loading='lazy'
+										/>
+									</DashboardCardHeader>
+									<DashboardCardContent feedItemID={_id} className=''>
+										<DashboardCardTitle className='line-clamp-2 text-lg text-s-8 dark:text-s-3'>
+											{title}
+										</DashboardCardTitle>
+									</DashboardCardContent>
+								</DashboardCard>
+							))}
+						</div>
+						{totalUploadItems / uploads.length > 1 && (
+							<div className='my-6 text-center'>
+								<Button onClickFn={handleLoadMoreItems}>Load More</Button>
+							</div>
+						)}
+					</>
 				) : (
 					<div className='my-10 '>
 						<h4 className='h3 font-bold'>
