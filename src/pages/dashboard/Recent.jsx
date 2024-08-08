@@ -49,10 +49,10 @@ const Recent = () => {
 					<h1 className='mb-5 text-3xl font-bold text-s-8 dark:text-s-1'>
 						Recent Uploads
 					</h1>
-					<ul className='grid gap-5 md:grid-cols-2'>
+					<ul className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
 						{recentFeedItems.map(({ _id, thumbnailUrl, title, content }) => (
 							<li key={_id}>
-								<DashboardCard className='grid bg-s-2 lg:grid-cols-2 dark:bg-s-6'>
+								<DashboardCard className='grid auto-cols-fr bg-s-2 dark:bg-s-6'>
 									<DashboardCardHeader
 										feedItemID={_id}
 										className='grid place-items-center'

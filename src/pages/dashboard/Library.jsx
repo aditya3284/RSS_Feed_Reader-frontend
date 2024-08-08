@@ -114,7 +114,7 @@ const Library = () => {
 							{uploads.map(({ _id, thumbnailUrl, title }) => (
 								<DashboardCard
 									key={_id}
-									className='bg-s-2 dark:bg-s-6'
+									className='grid auto-cols-fr bg-s-2 dark:bg-s-6'
 								>
 									<DashboardCardHeader feedItemID={_id} className=''>
 										<img

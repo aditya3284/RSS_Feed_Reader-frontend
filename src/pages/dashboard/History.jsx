@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
 	DashboardCardContent,
@@ -22,10 +21,10 @@ const History = () => {
 					{feedItemsHistory.map(({ heading, history, _id }) => (
 						<section key={_id}>
 							<h2 className='my-5 text-2xl font-semibold'>{heading}</h2>
-							<ul className='grid gap-5 md:grid-cols-2'>
+							<ul className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
 								{history.map(({ _id, thumbnailUrl, title, content }) => (
 									<li key={_id}>
-										<DashboardCard className='grid grid-cols-2 bg-s-2 dark:bg-s-6'>
+										<DashboardCard className='grid auto-cols-fr bg-s-2 dark:bg-s-6'>
 											<DashboardCardHeader
 												feedItemID={_id}
 												className='grid place-items-center'
@@ -53,8 +52,6 @@ const History = () => {
 							</ul>
 						</section>
 					))}
-
-					<Button>Load More</Button>
 				</>
 			) : (
 				<div className='mt-10 text-center'>

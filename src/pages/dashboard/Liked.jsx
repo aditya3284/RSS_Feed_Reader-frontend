@@ -39,7 +39,7 @@ const Liked = () => {
 
 	function handleLoadMoreItems() {
 		setOffest((prevOffset) => prevOffset + 6);
-		setLimit((prevLimit) => prevLimit + 6);
+		setLimit(6);
 	}
 
 	return (
@@ -49,10 +49,10 @@ const Liked = () => {
 					<h1 className='mb-5 text-3xl font-bold text-s-8 dark:text-s-1'>
 						Liked
 					</h1>
-					<ul className='grid gap-5 md:grid-cols-2'>
+					<ul className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
 						{likedFeedItems.map(({ _id, thumbnailUrl, title, content }) => (
 							<li key={_id}>
-								<DashboardCard className='grid grid-cols-2 bg-s-2 dark:bg-s-6'>
+								<DashboardCard className='grid auto-cols-fr bg-s-2 dark:bg-s-6'>
 									<DashboardCardHeader
 										feedItemID={_id}
 										className='grid place-items-center'
@@ -61,13 +61,13 @@ const Liked = () => {
 											src={thumbnailUrl}
 											alt=''
 											width={480}
-											height={360}
+											height={320}
 											className='aspect-video bg-s-4 object-cover'
 											loading='lazy'
 										/>
 									</DashboardCardHeader>
 									<DashboardCardContent feedItemID={_id} className='py-8'>
-										<DashboardCardTitle className='line-clamp-1'>
+										<DashboardCardTitle className='mb-5 line-clamp-1'>
 											{title}
 										</DashboardCardTitle>
 										<DashboardCardDescription className='line-clamp-2 text-s-8 dark:text-s-3'>
