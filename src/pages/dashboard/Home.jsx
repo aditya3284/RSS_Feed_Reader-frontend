@@ -26,7 +26,7 @@ const Home = () => {
 
 	const fetchRecentPosts = async () => {
 		try {
-			const response = await fetch("/api/v1/user/all/items", {
+			const response = await fetch("/api/v1/user/all/items?limit=9&offset=0", {
 				method: "GET",
 			});
 			const data = await response.json();
@@ -42,7 +42,7 @@ const Home = () => {
 	const fetchLikedPosts = async () => {
 		try {
 			const response = await fetch(
-				"/api/v1/user/liked/items",
+				"/api/v1/user/liked/items?limit=6&offset=0",
 				{
 					method: "GET",
 				}
@@ -122,7 +122,7 @@ const Home = () => {
 											/>
 										</DashboardCardHeader>
 										<DashboardCardContent feedItemID={_id} className=''>
-											<DashboardCardDescription className=' text-s-8 dark:text-s-3'>
+											<DashboardCardDescription className='text-s-8 dark:text-s-3'>
 												{title}
 											</DashboardCardDescription>
 										</DashboardCardContent>
@@ -164,12 +164,12 @@ const Home = () => {
 												className='aspect-video rounded-xl bg-p-1 object-cover'
 												loading='lazy'
 											/>
-											<h4 className='line-clamp-2 py-4 text-left'>{title}</h4>
+											<h4 className='my-5 line-clamp-2 text-left'>{title}</h4>
 										</Link>
 									</li>
 								))}
 							</ol>
-							{likedPost.length > 6 && (
+							{likedPost.length > 4 && (
 								<div className='text-center font-bold'>
 									<Link to='/dashboard/liked' className='hover:text-s-4'>
 										View All
@@ -187,7 +187,7 @@ const Home = () => {
 						</div>
 					)}
 				</div>
-				<div className='m-5 rounded-2xl bg-p-5 px-7 py-5'>
+				<div className='m-5 max-h-72 overflow-hidden rounded-2xl bg-p-5 px-7 py-5'>
 					<h2 className='mb-10 text-2xl font-bold text-s-8 dark:text-s-1'>
 						Creators
 					</h2>
