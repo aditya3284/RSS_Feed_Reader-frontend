@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import {
 	DashboardCard,
@@ -11,8 +10,37 @@ import {
 
 const Recent = () => {
 	document.querySelector("title").text = "Recent";
-	const { data } = useLoaderData();
-	const [recentFeedItems] = useState(data.feedItemsList);
+	const [recentFeedItems, setRecentFeedItems] = useState([]);
+	const [totalRecentItems, setTotalRecentItems] = useState(0);
+	const [offset, setOffset] = useState(0);
+
+	useEffect(() => {
+		fetchRecentPosts(offset);
+	}, [offset]);
+
+	const fetchRecentPosts = async (offset) => {
+		try {
+			const response = await fetch(
+				`/api/v1/user/all/items?limit=6&offset=${offset}`,
+				{
+					method: "GET",
+				}
+			);
+			const data = await response.json();
+			setRecentFeedItems(
+				response.ok
+					? [...recentFeedItems, ...data.data.feedItemsList]
+					: recentFeedItems
+			);
+			setTotalRecentItems(data.data.totalCount);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	function handleLoadMoreItems() {
+		setOffset((prevOffset) => prevOffset + 6);
+	}
 
 	return (
 		<div className='p-5'>
@@ -50,7 +78,11 @@ const Recent = () => {
 							</li>
 						))}
 					</ul>
-					<Button>Load More</Button>
+					{totalRecentItems / recentFeedItems.length > 1 && (
+						<div className='my-6 text-center'>
+							<Button onClickFn={handleLoadMoreItems}>Load More</Button>
+						</div>
+					)}
 				</div>
 			) : (
 				<div className='mt-10 text-center'>
@@ -63,18 +95,5 @@ const Recent = () => {
 		</div>
 	);
 };
-
-export async function loader() {
-	if (localStorage.getItem("user")) {
-		const response = await fetch("/api/v1/user/all/items", {
-			method: "GET",
-		});
-		const data = await response.json();
-
-		return response.ok && data.data ? data : { data: { feedItemsList: [] } };
-	}
-
-	return null;
-}
 
 export default Recent;
