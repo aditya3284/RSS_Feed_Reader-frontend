@@ -1,9 +1,16 @@
 import {
 	Clock,
+	Express,
 	FilledHeart,
 	History,
 	Home,
 	Library,
+	MongoDB,
+	Mongoose,
+	NodeJs,
+	React,
+	ReactRouter,
+	TailwindCSS,
 	benefit_Icon1,
 	benefit_Icon2,
 	benefit_Icon3,
@@ -33,22 +40,17 @@ const navigation = [
 	},
 	{
 		id: "2",
-		title: "Blog",
-		url: "/blog",
-	},
-	{
-		id: "3",
 		title: "Roadmap",
 		url: "/roadmap",
 	},
 	{
-		id: "4",
+		id: "3",
 		title: "New account",
 		url: "/signup",
 		onlyMobile: true,
 	},
 	{
-		id: "5",
+		id: "4",
 		title: "Log in",
 		url: "/login",
 		onlyMobile: true,
@@ -135,11 +137,20 @@ const thirdPartyIntegrations = {
 	],
 };
 
+const technologyUsed = [
+	{ id: 0, icon: MongoDB, title: "MongoDB" },
+	{ id: 1, icon: Express, title: "Express.js" },
+	{ id: 2, icon: React, title: "React" },
+	{ id: 3, icon: NodeJs, title: "NodeJS" },
+	{ id: 4, icon: TailwindCSS, title: "Tailwind CSS" },
+	{ id: 5, icon: Mongoose, title: "Mongoose ODM" },
+	{ id: 6, icon: ReactRouter, title: "React Router" },
+];
+
 const pricing = [
 	{
 		id: "0",
 		title: "Basic",
-		description: "AI chatbot, personalized recommendations",
 		price: "0",
 		features: [
 			"An feed reader that can understand your needs",
@@ -150,8 +161,7 @@ const pricing = [
 	{
 		id: "1",
 		title: "Premium",
-		description: "Advanced AI chatbot, priority support, analytics dashboard",
-		price: "9.99",
+		price: "6.99",
 		features: [
 			"An advanced feed reader that can fulfil complex needs",
 			"An analytics dashboard to track your choosen feeds",
@@ -161,8 +171,7 @@ const pricing = [
 	{
 		id: "2",
 		title: "Enterprise",
-		description: "Custom AI chatbot, advanced analytics, dedicated account",
-		price: null,
+		price: 9.99,
 		features: [
 			"An feed reader that can understand your needs",
 			"Personalized feed boards based on your preferences",
@@ -360,5 +369,6 @@ export {
 	profileSideNav,
 	sideNavItems,
 	socials,
+	technologyUsed,
 	thirdPartyIntegrations,
 };
