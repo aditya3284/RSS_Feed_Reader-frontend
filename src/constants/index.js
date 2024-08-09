@@ -327,9 +327,20 @@ const dummyFeedItemData = [
 ];
 
 const profileSideNav = [
-	{ id: 0, label: "Account", link: "/profile/account" },
-	{ id: 1, label: "Subscription", link: "/profile/subscription" },
-	{ id: 2, label: "Notification", link: "/profile/notification" },
+	{ id: 0, label: "Account", link: "/profile/account", onlyMobile: false },
+	{
+		id: 1,
+		label: "Subscription",
+		link: "/profile/subscription",
+		onlyMobile: false,
+	},
+	{
+		id: 2,
+		label: "Notification",
+		link: "/profile/notification",
+		onlyMobile: false,
+	},
+	{ id: 3, label: "Logout", link: "/logout", onlyMobile: true },
 ];
 
 const profileNotificationList = [
