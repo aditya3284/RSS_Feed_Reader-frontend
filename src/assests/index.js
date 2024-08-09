@@ -16,20 +16,20 @@ export { default as benefit_Icon4 } from "./features/icon4.svg";
 export { default as discordColor } from "./thirdPartyIntegrations/discord.png";
 export { default as notionColor } from "./thirdPartyIntegrations/notion.png";
 export { default as youtubeColor } from "./thirdPartyIntegrations/youtube.png";
-//theme-icons-svg
-export { default as MoonSVG } from "./theme/Moon.svg";
-export { default as SunSVG } from "./theme/Sun.svg";
+//theme-icons-jsx
+export { default as MoonSVG } from "./theme/Moon.jsx";
+export { default as SunSVG } from "./theme/Sun.jsx";
 //sidebar-icons-svg
-export { default as Archive } from "./icons/Archive.svg";
 export { default as Clock } from "./icons/Clock.svg";
 export { default as FilledHeart } from "./icons/FilledHeart.svg";
 export { default as History } from "./icons/History.svg";
 export { default as Home } from "./icons/Home.svg";
 export { default as Library } from "./icons/Library.svg";
-export { default as Plus } from "./icons/Plus.svg";
-//action-icons-svg
-export { default as Delete } from "./icons/Delete.svg";
-export { default as Exit } from "./icons/Exit.svg";
-export { default as Liked } from "./icons/Liked.svg";
-export { default as NotLiked } from "./icons/NotLiked.svg";
-export { default as OutBound } from "./icons/OutArrow.svg";
+export { default as PlusIcon } from "./icons/Plus.jsx";
+//action-icons-jsx
+export { default as CalendarIcon } from "./icons/Calendar.jsx";
+export { default as CheckIcon } from "./icons/Check.jsx";
+export { default as DeleteIcon } from "./icons/Delete.jsx";
+export { default as ExitIcon } from "./icons/Exit.jsx";
+export { default as LikedIcon } from "./icons/Liked.jsx";
+export { default as OutBound } from "./icons/OutArrow.jsx";
