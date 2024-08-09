@@ -33,3 +33,11 @@ export { default as DeleteIcon } from "./icons/Delete.jsx";
 export { default as ExitIcon } from "./icons/Exit.jsx";
 export { default as LikedIcon } from "./icons/Liked.jsx";
 export { default as OutBound } from "./icons/OutArrow.jsx";
+// technology-icons-svg
+export { default as Express } from "./technology/Express.png";
+export { default as MongoDB } from "./technology/MongoDB.svg";
+export { default as Mongoose } from "./technology/Mongoose.js.svg";
+export { default as NodeJs } from "./technology/Node.js.svg";
+export { default as ReactRouter } from "./technology/react-router.svg";
+export { default as React } from "./technology/React.svg";
+export { default as TailwindCSS } from "./technology/Tailwind CSS.svg";
