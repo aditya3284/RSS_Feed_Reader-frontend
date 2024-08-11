@@ -95,6 +95,21 @@
 	.modal {
 		@apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  rounded-xl backdrop:bg-s-4/85 dark:bg-slate-800 dark:text-s-2 dark:backdrop:bg-s-7/85;
 	}
+
+	.accordion-title {
+		@apply text-center font-semibold mt-16 mb-10 mx-3 md:my-7
+	}
+
+	.accordion-body {
+		@apply flex flex-col gap-1.5
+	}
+
+	.accordion-item {
+		@apply px-4 py-1
+	}
+	.accordion-content {
+		@apply py-3
+	}
 }
 
 @layer utilities {
