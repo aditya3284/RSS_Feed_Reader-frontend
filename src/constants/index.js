@@ -176,6 +176,50 @@ const frequentlyAskedQuestions = [
 	},
 ];
 
+const milestones = [
+	{
+		id: 0,
+		date: "Q3 2024",
+		title: "Initial Release",
+		description:
+			"Launch the basic version of the feed reader with essential features.",
+	},
+	{
+		id: 1,
+		date: "Q4 2024",
+		title: "Enhanced Filtering",
+		description:
+			"Introduce advanced filtering options to improve content categorization.",
+	},
+	{
+		id: 2,
+		date: "Q1 2025",
+		title: "Tagging for Feeds",
+		description: "A tagging system to help you better manage your feeds.",
+	},
+	{
+		id: 3,
+		date: "Q2 2025",
+		title: "Group feeds",
+		description:
+			"Easily group related articles and topics for a more streamlined reading experience.",
+	},
+	{
+		id: 4,
+		date: "Q3 2025",
+		title: "Sync Across Devices",
+		description:
+			"Never lose your place again. Sync your posts across all your devices for seamless reading.",
+	},
+	{
+		id: 5,
+		date: "Q4 2025",
+		title: "Social Sharing",
+		description:
+			"Make it easier than ever to share your favorite posts with friends, family, and colleagues.",
+	},
+];
+
 const technologyUsed = [
 	{ id: 0, icon: MongoDB, title: "MongoDB" },
 	{ id: 1, icon: Express, title: "Express.js" },
@@ -414,6 +458,7 @@ export {
 	dummyFeedItemData,
 	features,
 	frequentlyAskedQuestions,
+	milestones,
 	navigation,
 	pricing,
 	profileNotificationList,
