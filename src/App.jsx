@@ -13,6 +13,7 @@ import {
 	Library,
 	Liked,
 	LogIn,
+	LogOut,
 	NotFound404,
 	Notification,
 	Pricing,
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
 	{
 		path: "/blog",
 		element: <Blog />,
+	},
+	{
+		path: "/logout",
+		element: <LogOut />,
 	},
 ]);
 const App = () => {

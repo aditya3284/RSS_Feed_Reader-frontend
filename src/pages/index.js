@@ -5,6 +5,7 @@ export { default as FeedItem } from "./FeedItem";
 export { default as Home } from "./Home";
 export { default as Integrations } from "./Integrations";
 export { default as LogIn } from "./LogIn";
+export { default as LogOut } from "./LogOut";
 export { default as NotFound404 } from "./NotFound404";
 export { default as Pricing } from "./Pricing";
 export { default as Profile } from "./Profile";
