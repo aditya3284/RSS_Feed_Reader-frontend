@@ -137,6 +137,45 @@ const thirdPartyIntegrations = {
 	],
 };
 
+const frequentlyAskedQuestions = [
+	{
+		id: 0,
+		title: "How do I unsubscribe from a feed?",
+		content:
+			"To unsubscribe from a feed, go to your library section in your dashboard, find the feed you want to remove, and select the option to delete. This will stop updates from that feed and remove it from your list.",
+	},
+	{
+		id: 1,
+		title: "How do I set up my feed reader?",
+		content:
+			"To set up your feed reader, simply sign up for an account, add the URLs of the feeds you want to follow, and the reader will automatically fetch and display new content from those sources. Feed readers provide a simple interface for adding and managing feeds.",
+	},
+	{
+		id: 2,
+		title: "Is my data secure with your feed reader?",
+		content:
+			"Yes, we prioritize your privacy and data security. We use methods to protect your data and ensure that your feed subscriptions and reading habits remain confidential. We do not share your information with third parties.",
+	},
+	{
+		id: 3,
+		title: "Can I access my feed reader on mobile devices?",
+		content:
+			"Yes, our feed reader is compatible with mobile devices. You can access and manage your feeds through ourr responsive website, ensuring you can stay updated on the go.",
+	},
+	{
+		id: 4,
+		title: "What should I do if I encounter issues with feeds not updating?",
+		content:
+			"If you experience problems with feeds not updating, try refreshing the feed or checking the feed URL for any errors. You can also clear your cache or contact our support team for assistance if the issue persists.",
+	},
+	{
+		id: 5,
+		title: "Are there any limits to the number of feeds I can subscribe to?",
+		content:
+			"Our free plan allows you to subscribe to a generous number of feeds. If you need to follow more feeds or require additional features, we will soon offer plans with expanded capabilities and additional support.",
+	},
+];
+
 const technologyUsed = [
 	{ id: 0, icon: MongoDB, title: "MongoDB" },
 	{ id: 1, icon: Express, title: "Express.js" },
@@ -374,6 +413,7 @@ const profileNotificationList = [
 export {
 	dummyFeedItemData,
 	features,
+	frequentlyAskedQuestions,
 	navigation,
 	pricing,
 	profileNotificationList,
