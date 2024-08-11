@@ -6,7 +6,10 @@ const Blog = () => {
 		<>
 			<main>
 				<Navbar />
-				<h1>Hello from blog Page</h1>
+				<div className='grid space-y-5 min-h-dvh place-content-center text-center'>
+					<h1 className='text-4xl font-bold'>Hello from blog Page</h1>
+					<p>You are quite curious my friend</p>
+				</div>
 			</main>
 			<Footer />
 		</>

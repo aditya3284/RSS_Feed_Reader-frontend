@@ -30,7 +30,7 @@ const Navbar = () => {
 					<Logo />
 					<nav
 						aria-label='primary'
-						className={` md:flex ${openNavigation ? "fixed inset-x-0 inset-y-full z-10 h-svh w-svw bg-s-5/50 backdrop-blur-sm" : "hidden"}`}
+						className={` md:flex ${openNavigation ? "fixed inset-x-0 inset-y-full z-10 h-svh w-svw bg-s-8/95 backdrop-blur-2xl" : "hidden select-none"}`}
 					>
 						<ol
 							className={`flex items-center gap-4 lg:gap-10 ${openNavigation ? "h-full w-full flex-col justify-center" : ""}`}
