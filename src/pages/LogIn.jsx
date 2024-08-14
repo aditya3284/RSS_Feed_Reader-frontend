@@ -1,23 +1,22 @@
-import { useRef } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "../components/ui/Button";
+import PasswordInput from "../components/ui/PasswordInput";
 import useLogIn from "../hooks/useLogIn";
 import useUserContext from "../hooks/useUserContext";
 
 const LogInForm = () => {
-	const userEmail = useRef(null);
-	const userPassword = useRef(null);
 	const { logIn, isloading, error } = useLogIn();
 	const navigate = useNavigate();
 	const { state } = useLocation();
 
-	async function handleFormSubmit(e) {
-		e.preventDefault();
-		const loggedIn = await logIn(
-			userEmail.current.value,
-			userPassword.current.value
-		);
+	async function handleFormSubmit(event) {
+		event.preventDefault();
+
+		const formData = new FormData(event.target);
+		const data = Object.fromEntries(formData);
+
+		const loggedIn = await logIn(data);
 
 		if (loggedIn) navigate(state?.path || "/");
 	}
@@ -52,7 +51,6 @@ const LogInForm = () => {
 						required
 						pattern='^\w+([\.+\-]?\w+)+@\w+([\.\-]?\w+)+\.(\w{2,6})$'
 						autoComplete='email'
-						ref={userEmail}
 						className='peer rounded-md bg-[#181a1b] px-3 py-2'
 					/>
 					<p className='invisible text-pink-700 peer-[:user-invalid]:visible'>
@@ -63,26 +61,22 @@ const LogInForm = () => {
 					<label htmlFor='password-input' className='font-semibold'>
 						Password
 					</label>
-					<input
-						id='password-input'
-						type='password'
-						name='password'
-						placeholder='password'
-						required
-						autoComplete='current-password'
-						ref={userPassword}
-						minLength={8}
-						maxLength={32}
-						className='peer rounded-md bg-[#181a1b] px-3 py-2'
+					<PasswordInput
+						inputId='password-input'
+						inputName='password'
+						inputPlaceholder='password'
+						inputAutocomplete='current-password'
+						inputRequired={true}
+						passwordMinLength={8}
+						passwordMaxLength={32}
+						classes='peer rounded-md bg-[#181a1b] px-3 py-2 w-full'
+						errorText='Password must be 8-32 characters long'
 					/>
-					<p className='invisible text-pink-700 peer-[:user-invalid]:visible'>
-						Password must be 8-32 characters long
-					</p>
 				</div>
 				<Button
 					disabled={isloading}
 					type='submit'
-					className='button mb-10 mt-2 bg-p-5 py-2.5'
+					className='button mb-10 mt-5 bg-p-5 py-2.5'
 				>
 					{isloading ? "Loading..." : "Submit"}
 				</Button>
@@ -101,7 +95,7 @@ const LogIn = () => {
 	const { state } = useLocation();
 
 	return authed ? (
-		<Navigate to={state?.path || "/blog"} />
+		<Navigate to={state?.path || "/"} />
 	) : (
 		<>
 			<main>

@@ -6,7 +6,7 @@ const useLogIn = () => {
 	const [error, setError] = useState(null);
 	const { dispatch } = useUserContext();
 
-	const logIn = async (email, password) => {
+	const logIn = async (formData) => {
 		setError(null);
 		setIsLoading(true);
 
@@ -14,7 +14,7 @@ const useLogIn = () => {
 			const response = await fetch("/api/v1/user/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password }),
+				body: JSON.stringify(formData),
 			});
 
 			const data = await response.json();

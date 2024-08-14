@@ -1,25 +1,21 @@
-import { useRef } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Button from "../components/ui/Button";
+import PasswordInput from "../components/ui/PasswordInput";
 import useSignUp from "../hooks/useSignUp";
 import useUserContext from "../hooks/useUserContext";
 
 const SignInForm = () => {
-	const userEmail = useRef(null);
-	const userPassword = useRef(null);
-	const userUsername = useRef(null);
 	const { signUp, isloading, error } = useSignUp();
 	const navigate = useNavigate();
 
-	async function handleFormSubmit(e) {
-		e.preventDefault();
+	async function handleFormSubmit(event) {
+		event.preventDefault();
 
-		const sigedIn = await signUp(
-			userUsername.current.value,
-			userEmail.current.value,
-			userPassword.current.value
-		);
+		const formData = new FormData(event.target);
+		const data = Object.fromEntries(formData);
+
+		const sigedIn = await signUp(data);
 
 		if (sigedIn) navigate("/login");
 	}
@@ -45,7 +41,6 @@ const SignInForm = () => {
 						placeholder='username'
 						required
 						autoComplete='username'
-						ref={userUsername}
 						className='peer rounded-md bg-[#181a1b] px-3 py-2'
 					/>
 					<p className='invisible text-pink-700 peer-[:user-invalid]:visible'>
@@ -64,7 +59,6 @@ const SignInForm = () => {
 						required
 						pattern='^\w+([\.+\-]?\w+)+@\w+([\.\-]?\w+)+\.(\w{2,6})$'
 						autoComplete='email'
-						ref={userEmail}
 						className='peer rounded-md bg-[#181a1b] px-3 py-2'
 					/>
 					<p className='invisible text-pink-700 peer-[:user-invalid]:visible'>
@@ -75,31 +69,27 @@ const SignInForm = () => {
 					<label htmlFor='password-input' className='font-semibold'>
 						Password
 					</label>
-					<input
-						id='password-input'
-						type='password'
-						name='password'
-						placeholder='password'
-						required
-						autoComplete='current-password'
-						ref={userPassword}
-						minLength={8}
-						maxLength={32}
-						className='peer rounded-md bg-[#181a1b] px-3 py-2'
+					<PasswordInput
+						inputId='password-input'
+						inputName='password'
+						inputAutocomplete='current-password'
+						inputPlaceholder='password'
+						inputRequired={true}
+						passwordMinLength={8}
+						passwordMaxLength={32}
+						classes='peer rounded-md bg-[#181a1b] px-3 py-2 w-full'
+						errorText='Password must be 8-32 characters long'
 					/>
-					<p className='invisible text-pink-700 peer-[:user-invalid]:visible'>
-						Password must be 8-32 characters long
-					</p>
 				</div>
 				<Button
 					disabled={isloading}
 					type='submit'
-					className='button mt-3 bg-p-5 py-2.5'
+					className='button mt-5 bg-p-5 py-2.5'
 				>
 					{isloading ? "loading..." : "Submit"}
 				</Button>
 				{error && (
-					<div className='rounded-xl  border border-red-500 py-3 text-center text-red-400'>
+					<div className='mt-10 rounded-xl border border-red-500 py-3 text-center text-red-400'>
 						{String(error)}
 					</div>
 				)}
@@ -118,7 +108,7 @@ const SignIn = () => {
 	const { authed } = useUserContext();
 
 	return authed ? (
-		<Navigate to={"/blog"} />
+		<Navigate to={"/"} />
 	) : (
 		<>
 			<main>
