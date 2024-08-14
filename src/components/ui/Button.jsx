@@ -24,7 +24,7 @@ const Button = ({
 
 	const renderLink = () => (
 		<Link to={href} className={classes} {...props}>
-			<span>{children}</span>
+			{children}
 		</Link>
 	);
 

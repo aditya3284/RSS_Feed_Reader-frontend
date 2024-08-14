@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { features } from "../../constants";
 import MaxWidthContainer from "../MaxWidthContainer";
 import { Card, CardDescription, CardFooter, CardHeader } from "../ui/Card";
@@ -25,7 +26,7 @@ const Features = () => {
 							</CardDescription>
 							<CardFooter className='flex justify-between font-sourceCodePro text-sm font-semibold uppercase'>
 								<img src={item.iconUrl} alt='' loading='lazy' />
-								<p>Explore More &gt;</p>
+								<Link to={"/dashboard/home"}>Explore More &gt;</Link>
 							</CardFooter>
 						</Card>
 					))}

@@ -2,11 +2,9 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { heroPeep_1 } from "../assests";
-import useLogOut from "../hooks/useLogOut";
 import useUserContext from "../hooks/useUserContext";
 
 const ProfileIcon = ({ showTitle, position, classes }) => {
-	const { logOut } = useLogOut();
 	const { user } = useUserContext();
 	const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
@@ -47,7 +45,7 @@ const ProfileIcon = ({ showTitle, position, classes }) => {
 					<Link to='/profile/account'>Profile</Link>
 				</div>
 				<div className='px-3 py-2'>
-					<p onClick={logOut}>Logout</p>
+					<Link to={"/logout"}>Logout</Link>
 				</div>
 			</div>
 		</button>
