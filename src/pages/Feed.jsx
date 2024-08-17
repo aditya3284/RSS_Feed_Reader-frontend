@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { Delete, heroPeep_1, Liked, NotLiked, OutBound } from "../assests";
+import { DeleteIcon, LikedIcon, OutBound } from "../assests";
+import EditableIcon from "../components/EditableIcon";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import {
@@ -96,70 +97,12 @@ const Feed = () => {
 				<Navbar />
 				<div className='mx-auto my-10 h-full max-w-5xl px-5 '>
 					<div className='grid items-center gap-5'>
-						<div className='relative size-40 overflow-hidden rounded-lg bg-s-3 dark:bg-black'>
-							<img
-								src={feedData?.icon.URL ?? heroPeep_1}
-								alt=''
-								className='aspect-square object-cover'
-								loading='lazy'
-							/>
-							<div className='absolute inset-0 rounded-full'>
-								<div className='grid size-full place-items-center overflow-clip rounded-lg bg-s-2/60 opacity-0 backdrop-blur-sm transition-opacity hover:opacity-100 dark:bg-black/60'>
-									{feedData?.icon.URL ? (
-										<>
-											<form
-												encType='multipart/form-data'
-												className='grid size-full select-none place-content-center font-bold'
-											>
-												<label
-													htmlFor='changeFeedIcon'
-													className='cursor-pointer'
-												>
-													Change
-												</label>
-												<input
-													disabled={feedData.name === "not found"}
-													type='file'
-													accept='image/png,image/jpeg,image/jpg,image/webp'
-													id='changeFeedIcon'
-													name='feedIcon'
-													hidden
-													onChange={handleFeedIconChange}
-												/>
-											</form>
-											<button
-												disabled={feedData.name === "not found"}
-												className='size-full select-none font-bold'
-												onClick={handleFeedIconDeletion}
-											>
-												<span>Delete</span>
-											</button>
-										</>
-									) : (
-										<form
-											encType='multipart/form-data'
-											className='grid size-full select-none place-content-center font-bold'
-										>
-											<label
-												htmlFor='feedIconInput'
-												className='cursor-pointer px-9 py-14'
-											>
-												Add Icon
-											</label>
-											<input
-												disabled={feedData.name === "not found"}
-												type='file'
-												accept='image/png,image/jpeg,image/jpg,image/webp'
-												id='feedIconInput'
-												name='feedIcon'
-												hidden
-												onChange={handleFeedIconChange}
-											/>
-										</form>
-									)}
-								</div>
-							</div>
-						</div>
+						<EditableIcon
+							fileInputName='feedIcon'
+							changeFunction={handleFeedIconChange}
+							deleteFunction={handleFeedIconDeletion}
+							iconString={feedData?.icon}
+						/>
 						<div className=''>
 							<h1 className=' text-pretty text-2xl font-bold sm:text-4xl'>
 								{feedData.name}
@@ -180,30 +123,24 @@ const Feed = () => {
 							</p>
 						</div>
 					</div>
-					<div className=' flex gap-2'>
+					<div className='flex gap-2'>
 						<button
 							title='Like'
 							disabled={feedData.name === "not found"}
 							onClick={handleFeedLikeToggle}
+							className='group rounded-xl p-1 hover:bg-s-2'
 						>
-							<img
-								src={feedData.favorite ? Liked : NotLiked}
-								width={40}
-								alt='like feed item'
-								className='rounded-xl p-[2px] hover:bg-s-3'
+							<LikedIcon
+								className={`${!feedData.favorite && "grayscale filter"}`}
 							/>
 						</button>
 						<button
 							title='Delete'
 							disabled={feedData.name === "not found"}
 							onClick={handleFeedDeletion}
+							className='group rounded-xl p-1 hover:bg-s-2 dark:hover:bg-s-5'
 						>
-							<img
-								src={Delete}
-								width={35}
-								alt='delete feed item'
-								className='rounded-xl p-[2px] hover:bg-s-3'
-							/>
+							<DeleteIcon />
 						</button>
 					</div>
 					<h2 className='my-5 text-3xl'>Posts</h2>
