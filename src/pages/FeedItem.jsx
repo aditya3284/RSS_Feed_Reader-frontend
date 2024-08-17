@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import { Liked, NotLiked } from "../assests";
+import { LikedIcon } from "../assests";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -71,12 +71,10 @@ const FeedItem = () => {
 							title='Like'
 							disabled={feedItemData.title === "Feed Item Not Found"}
 							onClick={handleFeedItemLikeToggle}
+							className='group rounded-xl px-2 hover:bg-s-2 dark:hover:bg-s-5'
 						>
-							<img
-								src={feedItemData.favorite ? Liked : NotLiked}
-								width={40}
-								alt='like feed item'
-								className='rounded-xl p-[2px] hover:bg-s-3'
+							<LikedIcon
+								className={`${!feedItemData.favorite && "grayscale filter"}`}
 							/>
 						</button>
 					</div>
