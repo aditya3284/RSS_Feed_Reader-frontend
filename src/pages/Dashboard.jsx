@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { Plus } from "../assests";
+import { PlusIcon } from "../assests";
 import Logo from "../components/Logo";
 import ProfileIcon from "../components/ProfileIcon";
 import SecondarySideNav from "../components/SecondarySideNav";
@@ -21,6 +21,7 @@ const Dashboard = () => {
 	const addFeedModal = useRef(null);
 	const topRef = useRef(null);
 	const [isLoading, setIsLaoding] = useState(false);
+	const [addFeedList, setAddFeedList] = useState([]);
 
 	const handleAddFeed = async (event) => {
 		event.preventDefault();
@@ -37,7 +38,9 @@ const Dashboard = () => {
 
 		if (response.ok) {
 			addFeedModal.current.close();
-		} else setIsLaoding(false);
+		}
+		setIsLaoding(false);
+		setAddFeedList([...addFeedList, event.target.value]);
 	};
 
 	return (
@@ -52,7 +55,7 @@ const Dashboard = () => {
 									to={link}
 									className={({ isActive }) =>
 										isActive
-											? "bg-s-2  text-cyan-600 hover:bg-[#d0d0d0] dark:bg-s-8 dark:text-p-5 dark:hover:bg-s-11"
+											? "bg-s-2 text-p-5 hover:bg-[#d0d0d0] dark:bg-s-8 dark:hover:bg-s-11"
 											: "text-s-8  hover:bg-s-2/60 dark:text-s-3 dark:hover:bg-s-6"
 									}
 								>
@@ -62,7 +65,7 @@ const Dashboard = () => {
 											width={size.width}
 											height={size.height}
 											alt=''
-											className='rounded-md'
+											className='fliter rounded-md'
 											loading='lazy'
 										/>
 										<p className='w-15 inline font-sora font-semibold transition-all'>
@@ -79,14 +82,7 @@ const Dashboard = () => {
 									addFeedModal.current.showModal();
 								}}
 							>
-								<img
-									src={Plus}
-									width={30}
-									height={30}
-									alt=''
-									className='rounded-md group-hover:text-emerald-500'
-									loading='lazy'
-								/>
+								<PlusIcon />
 								<p className='w-15 inline font-sora font-semibold'>Add Feed</p>
 							</Button>
 						</li>
@@ -100,21 +96,14 @@ const Dashboard = () => {
 			</Sidebar>
 			<div className='m-2 w-full rounded-xl bg-s-2/30 dark:bg-s-11'>
 				<span ref={topRef}></span>
-				<Outlet />
+				<Outlet context={addFeedList} />
 				<Button
 					className='group fixed bottom-52 right-5 flex items-center gap-2.5 rounded-xl bg-s-3 p-3 transition-all hover:bg-p-4 hover:text-emerald-900 md:hidden dark:bg-s-7 dark:text-s-3'
 					onClickFn={() => {
 						addFeedModal.current.showModal();
 					}}
 				>
-					<img
-						src={Plus}
-						width={30}
-						height={30}
-						alt=''
-						className='rounded-md group-hover:text-emerald-500'
-						loading='lazy'
-					/>
+					<PlusIcon />
 				</Button>
 				<Button
 					className='fixed bottom-[9.5rem] right-5 bg-s-3 p-3 md:bottom-[85px] dark:bg-s-7 dark:text-s-2'
@@ -157,7 +146,7 @@ const Dashboard = () => {
 						/>
 						<input
 							type='submit'
-							className='mx-auto w-fit rounded-lg bg-purple-600 px-2 py-1.5'
+							className='mx-auto w-fit rounded-lg bg-p-5 px-2 py-1.5 font-bold text-s-1'
 							value={isLoading ? "Loading..." : "Add Feed"}
 						/>
 					</form>

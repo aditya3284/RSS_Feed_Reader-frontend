@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { heroPeep_1 } from "../../assests";
 import {
 	DashboardCard,
@@ -17,12 +17,13 @@ const Home = () => {
 	const [recentPosts, setRecentPosts] = useState([]);
 	const [creatorList, setCreatorList] = useState([]);
 	const [likedPost, setLikedPost] = useState([]);
+	const addFeedList = useOutletContext();
 
 	useEffect(() => {
 		fetchRecentPosts();
 		fetchCreators();
 		fetchLikedPosts();
-	}, []);
+	}, [addFeedList]);
 
 	const fetchRecentPosts = async () => {
 		try {
