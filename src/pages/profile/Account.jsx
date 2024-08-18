@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { heroPeep_1 } from "../../assests";
 import EditableDetails from "../../components/EditableDetails";
+import EditableIcon from "../../components/EditableIcon";
 import MaxWidthContainer from "../../components/MaxWidthContainer";
 import Button from "../../components/ui/Button";
 import {
@@ -12,6 +12,7 @@ import {
 	ModalHeader,
 	ModalTitle,
 } from "../../components/ui/Modal";
+import PasswordInput from "../../components/ui/PasswordInput";
 import useUserContext from "../../hooks/useUserContext";
 
 const Account = () => {
@@ -43,7 +44,12 @@ const Account = () => {
 		if (response.ok) {
 			const res = await response.json();
 			setUserProfileDetails({ ...userProfileDetails, ...res?.data.user });
-			event.target[0].value = "";
+			const allElements = event.target.elements;
+			for (let element of allElements) {
+				if (element.tagName === "INPUT") {
+					element.value = "";
+				}
+			}
 		}
 	};
 
@@ -120,68 +126,12 @@ const Account = () => {
 		<MaxWidthContainer>
 			<div className='mx-auto my-10 grid max-w-2xl gap-12 text-s-7 dark:text-s-2'>
 				<section aria-label='profile information'>
-					<div className='relative size-40 overflow-hidden rounded-full bg-s-3 dark:bg-black'>
-						<img
-							src={userProfileDetails?.profilePicture?.URL ?? heroPeep_1}
-							alt=''
-							className='aspect-square object-cover'
-							loading='lazy'
-						/>
-						<div className='absolute inset-0 rounded-full'>
-							<div className='grid size-full place-items-center overflow-clip rounded-full bg-s-2/60 opacity-0 backdrop-blur-sm transition-opacity hover:opacity-100 dark:bg-black/60'>
-								{userProfileDetails?.profilePicture?.URL ? (
-									<>
-										<form
-											encType='multipart/form-data'
-											className='grid size-full select-none place-content-center font-bold'
-										>
-											<label
-												htmlFor='changeAvatarInput'
-												className='cursor-pointer'
-											>
-												Change
-											</label>
-											<input
-												type='file'
-												accept='image/png,image/jpeg,image/jpg,image/webp'
-												id='changeAvatarInput'
-												name='profilePictureToUpdate'
-												hidden
-												onChange={handleProfilePictureChange}
-											/>
-										</form>
-
-										<button
-											className='size-full select-none font-bold'
-											onClick={handleProfilePictureDeletion}
-										>
-											<span>Delete</span>
-										</button>
-									</>
-								) : (
-									<form
-										encType='multipart/form-data'
-										className='grid size-full select-none place-content-center font-bold'
-									>
-										<label
-											htmlFor='avatarInput'
-											className='cursor-pointer px-9 py-14'
-										>
-											Add Avatar
-										</label>
-										<input
-											type='file'
-											accept='image/png,image/jpeg,image/jpg,image/webp'
-											id='avatarInput'
-											name='profilePictureToUpdate'
-											hidden
-											onChange={handleProfilePictureChange}
-										/>
-									</form>
-								)}
-							</div>
-						</div>
-					</div>
+					<EditableIcon
+						fileInputName='profilePictureToUpdate'
+						iconString={userProfileDetails?.profilePicture}
+						changeFunction={handleProfilePictureChange}
+						deleteFunction={handleProfilePictureDeletion}
+					/>
 					<div className=''>
 						<h1 className='line-clamp-1 max-w-lg text-3xl font-bold dark:text-s-1'>
 							{userProfileDetails.fullName}
@@ -203,138 +153,111 @@ const Account = () => {
 						<EditableDetails
 							label='Name'
 							description={userProfileDetails.fullName}
+							labelHtmlFor={"name"}
 						>
-							<form
-								className='grid grid-cols-[40%,60%]'
-								onSubmit={handleFormSubmit}
-							>
-								<label htmlFor='name' className='text-lg font-medium'>
-									Name
-								</label>
-								<input
-									type='text'
-									name='fullName'
-									id='name'
-									autoComplete='name'
-									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-								/>
-								<button
-									type='submit'
-									className='bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'
-								>
-									Save
-								</button>
-								<span className='hidden text-red-600 peer-[:user-invalid]:block'>
-									Enter valid Name
-								</span>
+							<form className='' onSubmit={handleFormSubmit}>
+								<div className='mt-2 grid grid-cols-[69%,27%] gap-2'>
+									<input
+										type='text'
+										name='fullName'
+										id='name'
+										autoComplete='name'
+										required
+										className='peer my-1 ml-1 h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+									<Button
+										type='submit'
+										className='my-auto h-fit rounded-xl bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'
+									>
+										Save
+									</Button>
+									<span className='hidden text-red-600 peer-[:user-invalid]:block'>
+										Enter valid Name
+									</span>
+								</div>
 							</form>
 						</EditableDetails>
 						<EditableDetails
 							label='Email address'
 							description={userProfileDetails.email}
+							labelHtmlFor={"email"}
 						>
-							<form
-								className='grid grid-cols-[40%,60%]'
-								onSubmit={handleFormSubmit}
-							>
-								<label htmlFor='email' className='text-lg font-medium'>
-									Email address
-								</label>
-								<input
-									type='email'
-									name='email'
-									id='email'
-									autoComplete='email'
-									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-								/>
-								<Button className='bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'>
-									Save
-								</Button>
-								<span className='hidden text-red-600 peer-[:user-invalid]:block'>
-									Enter valid Email address
-								</span>
+							<form className='' onSubmit={handleFormSubmit}>
+								<div className='mt-2 grid grid-cols-[69%,27%] gap-2'>
+									<input
+										type='email'
+										name='email'
+										id='email'
+										required
+										autoComplete='email'
+										className='peer my-1 ml-1 h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+									<Button className='my-auto h-fit rounded-xl bg-s-3 px-3 py-2 text-s-6 peer-[:user-invalid]:cursor-not-allowed dark:bg-s-1 dark:text-s-8'>
+										Save
+									</Button>
+									<span className='ml-1 hidden h-fit text-red-600 peer-[:user-invalid]:block'>
+										Enter valid Email address
+									</span>
+								</div>
 							</form>
 						</EditableDetails>
 						<EditableDetails label='Password' description='••••••••••••'>
-							<form
-								className='grid grid-cols-[45%,55%] gap-2'
-								onSubmit={handlePasswordChange}
-							>
-								<label htmlFor='crnt-pswrd' className='text-lg font-medium'>
-									Current Password
-								</label>
-								<div className='relative'>
-									<input
-										type='password'
-										name='oldPassword'
-										id='crnt-pswrd'
-										autoComplete='current-password'
-										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-									/>
-									<Button
-										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
-										onClickFn={(e) => {
-											e.preventDefault();
-											const input = document.getElementById("crnt-pswrd");
-											input.type =
-												input.type === "password" ? "text" : "password";
-										}}
-									>
-										show
-									</Button>
+							<form className='space-y-5' onSubmit={handlePasswordChange}>
+								<div className='grid gap-2'>
+									<label htmlFor='crnt-pswrd' className='text-lg font-medium'>
+										Current Password
+									</label>
+									<div className='overflow-hidden rounded-lg bg-s-2 text-s-8 dark:bg-s-3'>
+										<PasswordInput
+											key={"crnt"}
+											inputAutocomplete={"current-password"}
+											inputId={"crnt-pswrd"}
+											inputRequired={true}
+											inputName={"oldPassword"}
+											classes={`h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3`}
+										/>
+									</div>
 								</div>
-								<label htmlFor='new-pswrd' className='text-lg font-medium'>
-									New Password
-								</label>
-								<div className='relative'>
-									<input
-										type='password'
-										name='newPassword'
-										id='new-pswrd'
-										autoComplete='new-password'
-										className=' h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-										onChange={(event) => setNewPassword(event.target.value)}
-									/>
-									<Button
-										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
-										onClickFn={(e) => {
-											e.preventDefault();
-											const input = document.getElementById("new-pswrd");
-											input.type =
-												input.type === "password" ? "text" : "password";
-										}}
-									>
-										show
-									</Button>
+								<div className='grid gap-2'>
+									<label htmlFor='new-pswrd' className='text-lg font-medium'>
+										New Password
+									</label>
+									<div className='overflow-hidden rounded-lg bg-s-2 text-s-8 dark:bg-s-3'>
+										<PasswordInput
+											key={"new"}
+											inputName={"newPassword"}
+											inputId={"new-pswrd"}
+											inputRequired={true}
+											inputAutocomplete={"new-password"}
+											onChangeFunction={(event) =>
+												setNewPassword(event.target.value)
+											}
+											classes={
+												"h-fit w-full rounded-lg bg-inherit px-3 py-2 text-s-7"
+											}
+										/>
+									</div>
 								</div>
-								<label htmlFor='repeat-pswrd' className='text-lg font-medium'>
-									Repeat Password
-								</label>
-								<div className='relative'>
-									<input
-										type='password'
-										name='repeatPassword'
-										id='repeat-pswrd'
-										autoComplete='new-password'
-										pattern={newPassword}
-										className='peer h-fit w-full rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-									/>
-									<Button
-										className='absolute right-1 top-2 bg-s-2 pl-1 dark:bg-s-3 dark:text-s-8'
-										onClickFn={(e) => {
-											e.preventDefault();
-											const input = document.getElementById("repeat-pswrd");
-											input.type =
-												input.type === "password" ? "text" : "password";
-										}}
-									>
-										show
-									</Button>
-									<p className='hidden text-pink-700 peer-[:invalid]:block'>
-										New password and repeat password do not match
-									</p>
+								<div className='grid gap-2'>
+									<label htmlFor='repeat-pswrd' className='text-lg font-medium'>
+										Repeat Password
+									</label>
+									<div className='overflow-hidden rounded-lg bg-s-2 text-s-8 dark:bg-s-3'>
+										<PasswordInput
+											key={"repeat"}
+											inputName={"repeatPassword"}
+											inputId={"repeat-pswrd"}
+											inputAutocomplete={"new-password"}
+											inputPattern={newPassword}
+											inputRequired={true}
+											classes={
+												"peer h-fit w-full bg-inherit rounded-lg px-3 py-2 text-s-7"
+											}
+											errorText='New password and repeat password do not match'
+										/>
+									</div>
 								</div>
-								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+								<Button className='rounded-xl bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
 									Save
 								</Button>
 							</form>
@@ -342,30 +265,28 @@ const Account = () => {
 						<EditableDetails
 							label='Gender'
 							description={userProfileDetails.gender}
+							labelHtmlFor={"gender"}
 						>
-							<form
-								className='grid grid-cols-[40%,60%]'
-								onSubmit={handleFormSubmit}
-							>
-								<label htmlFor='gender' className='text-lg font-medium'>
-									Gender
-								</label>
-								<input
-									type='text'
-									list='gender-list'
-									name='gender'
-									id='gender'
-									autoComplete='sex'
-									className='h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-								/>
-								<datalist id='gender-list'>
-									<option value='Male'></option>
-									<option value='Female'></option>
-									<option value='Other'></option>
-								</datalist>
-								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
-									Save
-								</Button>
+							<form className='' onSubmit={handleFormSubmit}>
+								<div className='mt-2 grid grid-cols-[69%,27%] gap-2'>
+									<input
+										type='text'
+										list='gender-list'
+										name='gender'
+										id='gender'
+										required
+										autoComplete='sex'
+										className='my-1 ml-1 h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+									<datalist id='gender-list'>
+										<option value='Male'></option>
+										<option value='Female'></option>
+										<option value='Other'></option>
+									</datalist>
+									<Button className='my-auto h-fit rounded-xl bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+										Save
+									</Button>
+								</div>
 							</form>
 						</EditableDetails>
 						<EditableDetails
@@ -373,27 +294,25 @@ const Account = () => {
 							description={new Date(
 								userProfileDetails.dateOfBirth
 							).toDateString()}
+							labelHtmlFor={"dob"}
 						>
-							<form
-								className='grid grid-cols-[40%,60%]'
-								onSubmit={handleFormSubmit}
-							>
-								<label htmlFor='dob' className='text-lg font-medium'>
-									Date of Birth
-								</label>
-								<input
-									type='date'
-									name='dateOfBirth'
-									id='dob'
-									autoComplete='bday'
-									className='peer h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
-								/>
-								<Button className='bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
-									Save
-								</Button>
-								<span className='hidden peer-[:user-invalid]:block'>
-									Enter valid Date of Birth
-								</span>
+							<form className='' onSubmit={handleFormSubmit}>
+								<div className='mt-2 grid grid-cols-[69%,27%] gap-2'>
+									<input
+										type='date'
+										name='dateOfBirth'
+										id='dob'
+										required
+										autoComplete='bday'
+										className='peer my-1 ml-1 h-fit rounded-lg bg-s-2 px-3 py-2 text-s-7 dark:bg-s-3'
+									/>
+									<Button className='my-auto h-fit rounded-xl bg-s-3 px-3 py-2 text-s-6 dark:bg-s-1 dark:text-s-8'>
+										Save
+									</Button>
+									<span className='ml-1 hidden peer-[:user-invalid]:block'>
+										Enter valid Date of Birth
+									</span>
+								</div>
 							</form>
 						</EditableDetails>
 					</div>
