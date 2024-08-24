@@ -36,11 +36,14 @@ const Account = () => {
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
 
-		const response = await fetch("/api/v1/user/profile", {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data),
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/profile`,
+			{
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data),
+			}
+		);
 		if (response.ok) {
 			const res = await response.json();
 			setUserProfileDetails({ ...userProfileDetails, ...res?.data.user });
@@ -60,11 +63,14 @@ const Account = () => {
 		if (formData.get("repeatPassword") === formData.get("newPassword")) {
 			formData.delete("repeatPassword");
 
-			const response = await fetch("/api/v1/user/profile/password", {
-				method: "PATCH",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(Object.fromEntries(formData)),
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/profile/password`,
+				{
+					method: "PATCH",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(Object.fromEntries(formData)),
+				}
+			);
 
 			if (response.ok) {
 				await response.json();
@@ -79,9 +85,12 @@ const Account = () => {
 	};
 
 	const handleProfilePictureDeletion = async () => {
-		const response = await fetch("/api/v1/user/profile/picture", {
-			method: "DELETE",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/profile/picture`,
+			{
+				method: "DELETE",
+			}
+		);
 		if (response.ok) {
 			const res = await response.json();
 			setUserProfileDetails({
@@ -96,10 +105,13 @@ const Account = () => {
 		const formData = new FormData();
 		formData.append("profilePictureToUpdate", event.target.files[0]);
 
-		const response = await fetch("/api/v1/user/profile/picture", {
-			method: "PATCH",
-			body: formData,
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/profile/picture`,
+			{
+				method: "PATCH",
+				body: formData,
+			}
+		);
 
 		if (response.ok) {
 			const res = await response.json();
@@ -112,9 +124,12 @@ const Account = () => {
 	};
 
 	const handleAccountDeletion = async () => {
-		const response = await fetch("/api/v1/user/profile", {
-			method: "DELETE",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/profile`,
+			{
+				method: "DELETE",
+			}
+		);
 
 		if (response.ok) {
 			dispatch({ type: "logout" });
@@ -373,9 +388,12 @@ const Account = () => {
 
 export async function loader() {
 	if (localStorage.getItem("user")) {
-		const response = await fetch("/api/v1/user/profile", {
-			method: "GET",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/profile`,
+			{
+				method: "GET",
+			}
+		);
 		const data = await response.json();
 
 		return response.ok && data.data

@@ -27,9 +27,12 @@ const Home = () => {
 
 	const fetchRecentPosts = async () => {
 		try {
-			const response = await fetch("/api/v1/user/all/items?limit=9&offset=0", {
-				method: "GET",
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/all/items?limit=9&offset=0`,
+				{
+					method: "GET",
+				}
+			);
 			const data = await response.json();
 			if (response.ok) {
 				setRecentPosts([...data.data.feedItemsList]);
@@ -43,7 +46,7 @@ const Home = () => {
 	const fetchLikedPosts = async () => {
 		try {
 			const response = await fetch(
-				"/api/v1/user/liked/items?limit=6&offset=0",
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/liked/items?limit=6&offset=0`,
 				{
 					method: "GET",
 				}
@@ -62,9 +65,12 @@ const Home = () => {
 		try {
 			const userID = JSON.parse(localStorage.getItem("user")).username;
 
-			const response = await fetch(`/api/v1/feed/u/${userID}`, {
-				method: "GET",
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed/u/${userID}`,
+				{
+					method: "GET",
+				}
+			);
 			const data = await response.json();
 			if (response.ok) {
 				setCreatorList([...data.data.Feeds]);

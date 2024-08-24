@@ -11,7 +11,7 @@ const useLogOut = () => {
 	const logOut = async () => {
 		setError(null);
 		setIsLoading(true);
-		await fetch("/api/v1/user/logout", {
+		await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/logout`, {
 			method: "POST",
 		})
 			.then((data) => data.json())

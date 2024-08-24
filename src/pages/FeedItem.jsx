@@ -15,14 +15,17 @@ const FeedItem = () => {
 
 	async function handleFeedItemLikeToggle() {
 		try {
-			const response = await fetch("/api/v1/feed-item/like", {
-				method: "PATCH",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					favorite: !feedItemData.favorite,
-					url: feedItemData.url,
-				}),
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed-item/like`,
+				{
+					method: "PATCH",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						favorite: !feedItemData.favorite,
+						url: feedItemData.url,
+					}),
+				}
+			);
 
 			if (response.ok) {
 				const res = await response.json();
@@ -98,9 +101,12 @@ const FeedItem = () => {
 
 export async function loader({ params }) {
 	if (localStorage.getItem("user")) {
-		const response = await fetch(`/api/v1/feed-item/i/${params.feedItemID}`, {
-			method: "GET",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/feed-item/i/${params.feedItemID}`,
+			{
+				method: "GET",
+			}
+		);
 		const data = await response.json();
 
 		return response.ok && data.data

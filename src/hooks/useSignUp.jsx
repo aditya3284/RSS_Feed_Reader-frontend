@@ -8,11 +8,14 @@ const useSignUp = () => {
 		setError(null);
 		setIsLoading(true);
 		try {
-			const response = await fetch("/api/v1/user/signup", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(formData),
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/signup`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(formData),
+				}
+			);
 
 			if (!response.ok) {
 				const data = await response.json();

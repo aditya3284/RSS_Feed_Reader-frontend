@@ -22,14 +22,17 @@ const Feed = () => {
 
 	const handleFeedLikeToggle = async () => {
 		try {
-			const response = await fetch("/api/v1/feed/like", {
-				method: "PATCH",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					favorite: !feedData.favorite,
-					url: feedData.url,
-				}),
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed/like`,
+				{
+					method: "PATCH",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						favorite: !feedData.favorite,
+						url: feedData.url,
+					}),
+				}
+			);
 
 			if (response.ok) {
 				const res = await response.json();
@@ -41,9 +44,12 @@ const Feed = () => {
 	};
 
 	const handleFeedDeletion = async () => {
-		const response = await fetch(`/api/v1/feed/f/${feedData._id}`, {
-			method: "DELETE",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/feed/f/${feedData._id}`,
+			{
+				method: "DELETE",
+			}
+		);
 
 		if (response.ok) {
 			navigate("/dashboard/home");
@@ -56,10 +62,13 @@ const Feed = () => {
 			const formData = new FormData();
 			formData.append("feedIcon", event.target.files[0]);
 
-			const response = await fetch(`/api/v1/feed/icon/${feedData._id}`, {
-				method: "PATCH",
-				body: formData,
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed/icon/${feedData._id}`,
+				{
+					method: "PATCH",
+					body: formData,
+				}
+			);
 
 			if (response.ok) {
 				const res = await response.json();
@@ -76,9 +85,12 @@ const Feed = () => {
 
 	const handleFeedIconDeletion = async () => {
 		try {
-			const response = await fetch(`/api/v1/feed/icon/${feedData._id}`, {
-				method: "DELETE",
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed/icon/${feedData._id}`,
+				{
+					method: "DELETE",
+				}
+			);
 			if (response.ok) {
 				const res = await response.json();
 				setFeedData({
@@ -191,9 +203,12 @@ const Feed = () => {
 
 export async function loader({ params }) {
 	if (localStorage.getItem("user")) {
-		const response = await fetch(`/api/v1/feed-item/f/${params.feedID}`, {
-			method: "GET",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/feed-item/f/${params.feedID}`,
+			{
+				method: "GET",
+			}
+		);
 		const data = await response.json();
 
 		return response.ok && data.data

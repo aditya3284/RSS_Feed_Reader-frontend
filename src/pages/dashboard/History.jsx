@@ -67,9 +67,12 @@ const History = () => {
 
 export async function loader() {
 	if (localStorage.getItem("user")) {
-		const response = await fetch("/api/v1/user/history/read", {
-			method: "GET",
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/user/history/read`,
+			{
+				method: "GET",
+			}
+		);
 		const data = await response.json();
 
 		return response.ok && data.data ? data : { data: { readHistory: [] } };

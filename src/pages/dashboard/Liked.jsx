@@ -22,7 +22,7 @@ const Liked = () => {
 	const fetchLikedPosts = async (limit, offset) => {
 		try {
 			const response = await fetch(
-				`/api/v1/user/liked/items?limit=${limit}&offset=${offset}`,
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/liked/items?limit=${limit}&offset=${offset}`,
 				{
 					method: "GET",
 				}

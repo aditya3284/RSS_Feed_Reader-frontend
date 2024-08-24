@@ -21,7 +21,7 @@ const Recent = () => {
 	const fetchRecentPosts = async (offset) => {
 		try {
 			const response = await fetch(
-				`/api/v1/user/all/items?limit=6&offset=${offset}`,
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/all/items?limit=6&offset=${offset}`,
 				{
 					method: "GET",
 				}

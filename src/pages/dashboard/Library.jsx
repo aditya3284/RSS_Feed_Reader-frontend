@@ -26,7 +26,7 @@ const Library = () => {
 	const fetchUploads = async (limit, offset) => {
 		try {
 			const response = await fetch(
-				`/api/v1/user/all/items?limit=${limit}&offset=${offset}`,
+				`${import.meta.env.VITE_BACKEND}/api/v1/user/all/items?limit=${limit}&offset=${offset}`,
 				{
 					method: "GET",
 				}
@@ -46,9 +46,12 @@ const Library = () => {
 		try {
 			const userID = JSON.parse(localStorage.getItem("user")).username;
 
-			const response = await fetch(`/api/v1/feed/u/${userID}`, {
-				method: "GET",
-			});
+			const response = await fetch(
+				`${import.meta.env.VITE_BACKEND}/api/v1/feed/u/${userID}`,
+				{
+					method: "GET",
+				}
+			);
 			const data = await response.json();
 			if (response.ok) {
 				setCreatorList([...data.data.Feeds]);

@@ -30,11 +30,14 @@ const Dashboard = () => {
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
 
-		const response = await fetch("/api/v1/feed/submit", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data),
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_BACKEND}/api/v1/feed/submit`,
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data),
+			}
+		);
 
 		if (response.ok) {
 			addFeedModal.current.close();
