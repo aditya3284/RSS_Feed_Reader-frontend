@@ -31,6 +31,7 @@ const Home = () => {
 				`${import.meta.env.VITE_BACKEND}/api/v1/user/all/items?limit=9&offset=0`,
 				{
 					method: "GET",
+					credentials: "include",
 				}
 			);
 			const data = await response.json();
@@ -49,6 +50,7 @@ const Home = () => {
 				`${import.meta.env.VITE_BACKEND}/api/v1/user/liked/items?limit=6&offset=0`,
 				{
 					method: "GET",
+					credentials: "include",
 				}
 			);
 			const data = await response.json();
@@ -69,6 +71,7 @@ const Home = () => {
 				`${import.meta.env.VITE_BACKEND}/api/v1/feed/u/${userID}`,
 				{
 					method: "GET",
+					credentials: "include",
 				}
 			);
 			const data = await response.json();
