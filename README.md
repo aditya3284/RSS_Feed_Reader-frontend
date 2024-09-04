@@ -4,18 +4,18 @@ Feed Reader is a modern web application designed to aggregate and display YouTub
 
 ## Table of Contents
 
-- [Description](#-description)
-- [Prerequisites](#-prerequisites)
-- [Technologies Used](#-technologies-used)
-- [Features](#-features)
-- [Installation and Setup](#-installation-and-setup)
-- [Running the Project](#-running-the-project)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [Acknowledgments](#-acknowledgments)
-- [Things I Learned](#-)
-- [Future Scope](#-)
-- [Contact](#-contact)
+- [Description](#description)
+- [Prerequisites](#prerequisites)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Installation and Setup](#installation-and-setup)
+- [Running the Project](#running-the-project)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
+- [Things I Learned](#things-i-learned)
+- [Future Scope](#future-scope)
+- [Contact](#contact)
 
 ## Description
 
@@ -258,7 +258,7 @@ For any questions or feedback, please reach out to:
 
 - :e-mail: **Email:** github@technologist.anonaddy.com
 - :point_right: **LinkedIn:** [in/pratap-adit](https://www.linkedin.com/in/yourprofile)
-- :computer: **GitHub:** [UniPasc](https://github.com/UniPasc)
+- :octocat: **GitHub:** [UniPasc](https://github.com/UniPasc)
 
 ---
 
