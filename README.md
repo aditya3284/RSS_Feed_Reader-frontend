@@ -21,7 +21,7 @@ Feed Reader is a modern web application designed to aggregate and display YouTub
 
 Feed Reader is an web application that leverages RSS feeds to provide a customized YouTube viewing experience. Unlike traditional YouTube browsing, which is influenced by recommendations and ads, Feed Reader offers a straightforward and distraction-free way to follow your favorite content creators.
 
-[**Feed Reader Backend GitHub Repoistory**](https://github.com/username/repositoryName)
+[**Feed Reader Backend GitHub Repoistory**](https://github.com/aditya3284/RSS_Feed_Reader-backend)
 
 - **Dynamic Routing:** Implemented routing with [React Router](https://reactrouter.com/) for seamless navigation.
 - **Code Quality:** Enforced code standards with [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/).
@@ -83,9 +83,9 @@ To set up this project locally, follow these steps:
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/your-repository.git
+    git clone https://github.com/aditya3284/RSS_Feed_Reader-frontend.git
 
-    cd your-repository
+    cd RSS_Feed_Reader-frontend
     ```
 
 2.  **Install dependencies:**
@@ -257,8 +257,7 @@ If you have ideas on how to enhance this project, please feel free to share them
 For any questions or feedback, please reach out to:
 
 - :e-mail: **Email:** github@technologist.anonaddy.com
-- :point_right: **LinkedIn:** [in/pratap-adit](https://www.linkedin.com/in/yourprofile)
-- :octocat: **GitHub:** [UniPasc](https://github.com/UniPasc)
+- :point_right: **LinkedIn:** [in/pratap-adit](https://www.linkedin.com/in/pratap-adit)
 
 ---
 
